@@ -45,8 +45,8 @@ OPEN_PAGE_WAITE_TIME        = 3
 CLEAR_TERMINAL_SCR_TIMES    = 50
 
 LOGIN_ACCOUNT = {
-    "account"   : "s3B217114@student.ncut.edu.tw",
-    "password"  : "A131724867"
+    "account"   : "",
+    "password"  : ""
 }
 
 def connect(url: str, account: str, password: str) -> None:

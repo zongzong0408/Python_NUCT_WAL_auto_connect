@@ -11,8 +11,8 @@ DETECT_CONNECT_ALIVE_TIME   = 10
 OPEN_PAGE_WAITE_TIME        = 3
 CLEAR_TERMINAL_SCR_TIMES    = 50
 ACCOUNT = {
-    "account"   : "s3B217114@student.ncut.edu.tw",
-    "password"  : "A131724867"
+    "account"   : "",
+    "password"  : ""
 }
 
 _header = {
