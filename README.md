@@ -1,0 +1,2 @@
+# Python_NUCT_WAL_auto_connect
+國立勤益科技大學全自動連接網路腳本
