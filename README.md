@@ -9,13 +9,15 @@
 
 ## 如何執行
 
-使用 `selenium` 視覺化爬蟲模組。  
+步驟 一：使用 `selenium` 視覺化爬蟲模組。  
 
 ```bash
 pip install selenium
 ```
 
-點擊 `auto-reconnect.py` 去啟動腳本。  
+步驟 二：點擊 `auto-reconnect.py` 去啟動腳本。
+
+大功告成！
 
 ## 版本差異
 
@@ -27,8 +29,8 @@ pip install selenium
 
 ## Contributing
 
-
+都是自己寫的，哈哈，這頗簡單ㄚ。
 
 ## License
-
-[GPL-3.0](https://www.gnu.org/licenses/gpl-3.0.zh-tw.html)
+此專案受到 [GPL-3.0](https://www.gnu.org/licenses/gpl-3.0.zh-tw.html) 保障。  
+Copyright © 2023 zong zong ( zongzong0408 )
