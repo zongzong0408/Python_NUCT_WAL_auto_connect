@@ -24,3 +24,14 @@ pip install selenium
 | v1 | 不想用 `selenium` 就可以完成動作，不過礙於不知道如何輸入帳密和送出，因此作罷失敗。 |
 | v2 | 使用 `selenium` 完成動作，完善只有必要中文提示詞與排除非預期錯誤。 |
 | v3 | 使用 `selenium` 完成動作，完善只有完整英文提示詞與排除非預期錯誤。 |
+
+## Contributing
+
+Pull requests are welcome. For major changes, please open an issue first
+to discuss what you would like to change.
+
+Please make sure to update tests as appropriate.
+
+## License
+
+[GPL-3.0](https://www.gnu.org/licenses/gpl-3.0.zh-tw.html)
