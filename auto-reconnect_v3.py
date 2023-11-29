@@ -29,12 +29,12 @@ else:
 """
     constant values description
 
-    TEST_IS_CONNECT_WAL_URL     : 
-    TARGET_TO_CONNECT_WAL_URL   : 
-    DETECT_CONNECT_ALIVE_TIME   : 
-    OPEN_PAGE_WAITE_TIME        : 
-    CLEAR_TERMINAL_SCR_TIMES    : 
-    LOGIN_ACCOUNT               : 
+    TEST_IS_CONNECT_WAL_URL     : (str) the URL that you can check if you are disconnect to WAL or not.
+    TARGET_TO_CONNECT_WAL_URL   : (str) the URL that you connect WAL.
+    DETECT_CONNECT_ALIVE_TIME   : (int uint8_t) the range that you detect is connecting to WAL or not.
+    OPEN_PAGE_WAITE_TIME        : (int uint8_t) the time that you wait program insert information to website then close page.
+    CLEAR_TERMINAL_SCR_TIMES    : (int uint8_t) the time that you clear your local terminal screen.
+    LOGIN_ACCOUNT               : (dic) the dictionary store your login account and password information.
 """
 
 TEST_IS_CONNECT_WAL_URL     = "https://www.google.com"
@@ -193,6 +193,8 @@ def main() -> None:
 
         sys.stdout.write("system ERROR:\t your are not input login account & password yet.\n")
         sys.stdout.write(f"system INFO:\t pls key your data to LOGIN_ACCOUNT[] list.\n")
+
+        return
 
     counting_start_time = time.time()
     detection_times = 1
