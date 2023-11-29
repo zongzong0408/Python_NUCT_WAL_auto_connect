@@ -34,7 +34,7 @@ else:
     DETECT_CONNECT_ALIVE_TIME   : (int uint8_t) the range that you detect is connecting to WAL or not.
     OPEN_PAGE_WAITE_TIME        : (int uint8_t) the time that you wait program insert information to website then close page.
     CLEAR_TERMINAL_SCR_TIMES    : (int uint8_t) the time that you clear your local terminal screen.
-    LOGIN_ACCOUNT               : (dic) the dictionary store your login account and password information.
+    LOGIN_ACCOUNT               : 
 """
 
 TEST_IS_CONNECT_WAL_URL     = "https://www.google.com"
