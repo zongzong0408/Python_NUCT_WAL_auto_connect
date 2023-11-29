@@ -1,9 +1,9 @@
 """
-    version FC
+    version FC v3
 
     using Python 3.7.0
     using Windows 11 Home
-    using FireFox or Chrome browser
+    using FireFox or Chrome browser driver
 """
 
 import requests
