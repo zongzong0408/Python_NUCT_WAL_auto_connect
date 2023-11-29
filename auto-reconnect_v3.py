@@ -45,8 +45,8 @@ OPEN_PAGE_WAITE_TIME        = 3
 CLEAR_TERMINAL_SCR_TIMES    = 50
 
 LOGIN_ACCOUNT = {
-    "account"   : "",
-    "password"  : ""
+    "account"   : "...",
+    "password"  : "..."
 }
 
 def connect(url: str, account: str, password: str) -> None:
@@ -188,6 +188,11 @@ def detect_connection(url: str) -> bool:
         return True
 
 def main() -> None:
+
+    if (LOGIN_ACCOUNT["account"] == "..." or LOGIN_ACCOUNT["password"] == "..."):
+
+        sys.stdout.write("system ERROR:\t your are not input login account & password yet.\n")
+        sys.stdout.write(f"system INFO:\t pls key your data to LOGIN_ACCOUNT[] list.\n")
 
     counting_start_time = time.time()
     detection_times = 1
