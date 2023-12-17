@@ -1,9 +1,9 @@
 """
-    version FC v3
+    version C v3.2
 
     using Python 3.7.0
     using Windows 11 Home
-    using FireFox or Chrome browser driver
+    using Chrome browser driver
 """
 
 import requests
@@ -22,6 +22,7 @@ except Exception as e:
     sys.stdout.write("system INFO:\t visit https://pypi.org/project/selenium/ to get more information.\n")
     sys.stdout.write("system INFO:\t you can run <$: pip install selenium > in your terminal to quick install package.\n")
     sys.stdout.write("system INFO:\t after that you need install the drive match you target browser then that's all.\n")
+
 else:
 
     sys.stdout.write("system INFO:\t successfully input selenium module.\n\n")
@@ -38,7 +39,7 @@ else:
 """
 
 TEST_IS_CONNECT_WAL_URL     = "https://www.google.com"
-TARGET_TO_CONNECT_WAL_URL   = "http://172.16.170.254:1000/login?admin"
+TARGET_TO_CONNECT_WAL_URL   = "http://192.168.0.2"
 
 DETECT_CONNECT_ALIVE_TIME   = 10
 OPEN_PAGE_WAITE_TIME        = 3
@@ -53,31 +54,17 @@ def connect(url: str, account: str, password: str) -> None:
 
     try:
 
-        driver = webdriver.Firefox()
+        driver = webdriver.Chrome("./chromedriver.exe")
 
     except Exception as e:
 
-        sys.stdout.write("system ERROR:\t cannot open FireFox browser.\n")
+        sys.stdout.write("system ERROR:\t cannot open Chrome browser.\n")
         sys.stdout.write(f"system DETAIL:\t {e}\n\n")
-        sys.stdout.write("system INFO:\t program is going to run another browser.\n")
-
-        try:
-
-            driver = webdriver.Chrome()
-
-        except Exception as e:
-
-            sys.stdout.write("system ERROR:\t cannot open Chrome browser.\n")
-            sys.stdout.write(f"system DETAIL:\t {e}\n\n")
-            sys.stdout.write("system INFO:\t program is going to shutdown. pls using popular browser.\n")
-
-        else:
-
-            sys.stdout.write("system INFO:\t successfully open Chrome driver.\n")
+        sys.stdout.write("system INFO:\t program is going to shutdown. pls using popular browser.\n")
 
     else:
 
-        sys.stdout.write("system INFO:\t successfully open firefox driver.\n")
+        sys.stdout.write("system INFO:\t successfully open Chrome driver.\n")
 
     try:
 
@@ -92,6 +79,8 @@ def connect(url: str, account: str, password: str) -> None:
     else:
 
         sys.stdout.write(f"system INFO:\t successfully connect target url. {url}\n")
+
+    
 
     try:
 
