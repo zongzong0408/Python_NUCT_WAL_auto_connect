@@ -55,7 +55,9 @@ def connect(url: str, account: str, password: str) -> None:
 
     try:
 
-        driver = webdriver.Chrome("./chromedriver.exe")
+        options = webdriver.ChromeOptions()
+        options.add_experimental_option("excludeSwitches", ["enable-logging"])
+        driver = webdriver.Chrome(executable_path = "./chromedriver.exe", options = options)
 
     except Exception as e:
 
