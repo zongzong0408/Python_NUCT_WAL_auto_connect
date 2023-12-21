@@ -16,10 +16,16 @@
 步驟 一：使用 `selenium` 視覺化爬蟲模組（使用版本 `3.0`）。  
 
 ```bash
-pip install selenium==3.0
+pip install selenium==4.6.0
 ```
 
-步驟 二：`ssl` 的版本與 `urllib3` 不相容，[參見議題](https://stackoverflow.com/questions/76187256/importerror-urllib3-v2-0-only-supports-openssl-1-1-1-currently-the-ssl-modu)。  
+步驟 二：安裝相依模組。  
+
+```bash
+pip install requests
+```
+
+步驟 三：`ssl` 的版本與 `urllib3` 不相容，[參見議題](https://stackoverflow.com/questions/76187256/importerror-urllib3-v2-0-only-supports-openssl-1-1-1-currently-the-ssl-modu)。  
 
 ```bash
 pip install urllib3==1.26.6
