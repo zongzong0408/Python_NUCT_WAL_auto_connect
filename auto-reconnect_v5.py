@@ -18,6 +18,8 @@ import os
 try:
     
     from selenium import webdriver
+    from selenium.webdriver.chrome.service import Service
+    from webdriver_manager.chrome import ChromeDriverManager
 
 except Exception as e:
 
@@ -59,12 +61,13 @@ def connect(url: str, account: str, password: str) -> None:
 
     try:
 
-        option = webdriver.ChromeOptions()
-        option.add_experimental_option("excludeSwitches", ["enable-automation"])
-        option.add_experimental_option('useAutomationExtension', False)
-        option.add_experimental_option("prefs", {"profile.password_manager_enabled": False, "credentials_enable_service": False})
+        a = time.time()
+        driver = webdriver.Chrome(service = Service(ChromeDriverManager().install()))
+        b = time.time()
+        init = round(b - a)
 
-        driver = webdriver.Chrome(executable_path = "./chromedriver.exe", options = option)
+        sys.stdout.write(f"system INFO:\t initialize Chrome drive cost {init} second(s).\n")
+        sys.stdout.write("system OK:\t successfully open Chrome driver.\n")
 
     except Exception as e:
 
@@ -72,32 +75,30 @@ def connect(url: str, account: str, password: str) -> None:
         sys.stdout.write("system ERROR:\t cannot open Chrome browser.\n")
         sys.stdout.write(f"system DETAIL:\t {e}\n\n")
         sys.stdout.write("system INFO:\t program is going to shutdown. pls using popular browser.\n")
-
-    else:
-
-        sys.stdout.write("system OK:\t successfully open Chrome driver.\n")
-        sys.stdout.write("system OK:\t now is going to open FireFox.\n")
+        # sys.stdout.write("system OK:\t now is going to open FireFox.\n")
 
     try:
 
-        driver.implicitly_wait(OPEN_PAGE_WAITE_TIME)
+        driver.implicitly_wait(5)
         driver.get(url)
+
+        sys.stdout.write(f"system OK:\t successfully connect target url. {url}\n")
 
     except Exception as e:
 
         sys.stdout.write("system ERROR:\t error on LINE <73>\n")
-        sys.stdout.write("system ERROR:\t cannot connect your target url.\n")
+        sys.stdout.write(f"system ERROR:\t cannot connect your target url, error http code {requests.get(url).status_code}.\n")
         sys.stdout.write(f"system DETAIL:\t {e}\n\n")
         sys.stdout.write(f"system INFO:\t you are trying connect {url}, pls try another LAN IP.\n")
 
-    else:
-
-        sys.stdout.write(f"system OK:\t successfully connect target url. {url}\n")
+        driver.close()
 
     try:
 
         username_field = driver.find_element("name", "username")
         password_field = driver.find_element("name", "password")
+
+        sys.stdout.write("system OK:\t successfully find input field and bottom.\n")
 
     except Exception as e:
     
@@ -106,14 +107,12 @@ def connect(url: str, account: str, password: str) -> None:
         sys.stdout.write(f"system DETAIL:\t {e}\n\n")
         sys.stdout.write("system INFO:\t pls find available and correct input field XPath.\n")
 
-    else:
-
-        sys.stdout.write("system OK:\t successfully find input field and bottom.\n")
-
     try:
 
         username_field.send_keys(account)
         password_field.send_keys(password)
+
+        sys.stdout.write("system OK:\t successfully input account and password information.\n")
 
     except Exception as e:
     
@@ -122,13 +121,11 @@ def connect(url: str, account: str, password: str) -> None:
         sys.stdout.write(f"system DETAIL:\t {e}\n\n")
         sys.stdout.write("system INFO:\t pls find available and correct input field XPath.\n")
 
-    else:
-
-        sys.stdout.write("system OK:\t successfully input account and password information.\n")
-
     try:
 
         time.sleep(OPEN_PAGE_WAITE_TIME)
+
+        sys.stdout.write("system OK:\t successfully waiting website get and refresh information.\n")
 
     except Exception as e:
 
@@ -137,14 +134,12 @@ def connect(url: str, account: str, password: str) -> None:
         sys.stdout.write(f"system DETAIL:\t {e}\n\n")
         sys.stdout.write("system INFO:\t pls input correct sleep time { time belongs to R }.\n")
 
-    else:
-
-        sys.stdout.write("system OK:\t successfully waiting website get and refresh information.\n")
-
     try:
 
         username_field = driver.find_element("xpath", '//*[@id="login_form_div"]/form/table/tbody/tr[1]/td[2]/button').click()
-    
+
+        sys.stdout.write("system OK : successfully send account & password information.\n")
+
     except Exception as e:
 
         sys.stdout.write("system ERROR:\t error on LINE <135>\n")
@@ -152,13 +147,11 @@ def connect(url: str, account: str, password: str) -> None:
         sys.stdout.write(f"system DETAIL:\t {e}\n\n")
         sys.stdout.write("system INFO:\t pls input correct sleep time {  belongs to R }.\n")
 
-    else:
-
-        sys.stdout.write("system OK : successfully send account & password information.\n")
-
     try:
         
         driver.quit()
+
+        sys.stdout.write("system OK: successfully quit selenium browser.\n")
 
     except Exception as e:
 
@@ -166,10 +159,6 @@ def connect(url: str, account: str, password: str) -> None:
         sys.stdout.write("system ERROR:\t cannot quit selenium browser.\n")
         sys.stdout.write(f"system DETAIL:\t {e}\n\n")
         sys.stdout.write("system INFO:\t pls quit it by yourself or shutdown program.\n")
-
-    else:
-
-        sys.stdout.write("system OK: successfully quit selenium browser.\n")
 
     return
     
@@ -180,6 +169,8 @@ def detect_connection(url: str) -> bool:
     try:
 
         status_code = requests.get(url).status_code
+
+        sys.stdout.write("system OK:\t successfully get WAL.\n")
     
     except Exception:
 
@@ -189,10 +180,6 @@ def detect_connection(url: str) -> bool:
         sys.stdout.write("system INFO:\t detect WAL connection is failed. the program is going to reconnect WAL.\n")
 
         return False
-
-    else:
-
-        sys.stdout.write("system OK:\t successfully get WAL.\n")
 
         return True
 
@@ -211,12 +198,22 @@ def main() -> None:
 
     while True:
 
-        if (detect_connection(TEST_IS_CONNECT_WAL_URL) == False):
+        if (detect_connection(TEST_IS_CONNECT_WAL_URL) != False):
             
             sys.stdout.write("system ERROR:\t cannot connect WAL.\n")
             sys.stdout.write(f"system INFO:\t program will finished reconnect WAL after {OPEN_PAGE_WAITE_TIME} times.\n")
 
-            connect(TARGET_TO_CONNECT_WAL_URL, LOGIN_ACCOUNT["account"], LOGIN_ACCOUNT["password"])
+            try:
+                
+                connect(TARGET_TO_CONNECT_WAL_URL, LOGIN_ACCOUNT["account"], LOGIN_ACCOUNT["password"])
+            
+            except Exception as e:
+
+                sys.stdout.write("system ERROR:\t error on LINE <200>\n")
+                sys.stdout.write("system ERROR:\t cannot run function -> connect()\n")
+                sys.stdout.write(f"system DETAIL:\t {e}\n\n")
+
+                # break
 
         time_tuple  = time.localtime()
         time_string = time.strftime("%m/%d/%Y, %H:%M:%S", time_tuple)
@@ -235,11 +232,6 @@ def main() -> None:
             sys.stdout.write(f"system DETAIL:\t {e}\n\n")
             sys.stdout.write("system INFO:\t pls input correct sleep time { time belongs to R }.\n")
 
-        else:
-
-            pass
-            # sys.stdout.write("system OK:\t successfully.\n")
-
         try:
 
             time.sleep(DETECT_CONNECT_ALIVE_TIME)
@@ -250,11 +242,6 @@ def main() -> None:
             sys.stdout.write("system ERROR:\t cannot let python script sleeping.\n")
             sys.stdout.write(f"system DETAIL:\t {e}\n\n")
             sys.stdout.write("system INFO:\t pls input correct sleep time { time belongs to R }.\n")
-
-        else:
-
-            # sys.stdout.write("system OK:\t successfully.\n")
-            pass
 
         detection_times += 1
 
