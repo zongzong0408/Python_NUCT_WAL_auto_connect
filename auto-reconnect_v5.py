@@ -1,9 +1,13 @@
 """
-    version CF v4
+    version C v5.0
 
     using Python 3.7.0
     using Windows 11 Home
-    using ( Chrome OR FireFox ) browser driver
+    
+    using selenium 4.6.0
+    using urllib 1.2.0
+
+    using Chrome browser driver
 """
 
 import requests
@@ -26,7 +30,7 @@ except Exception as e:
 
 else:
 
-    sys.stdout.write("system INFO:\t successfully input selenium module.\n\n")
+    sys.stdout.write("system OK:\t successfully input selenium module.\n\n")
 
 """
     constant values description
@@ -40,7 +44,7 @@ else:
 """
 
 TEST_IS_CONNECT_WAL_URL     = "https://www.google.com"
-TARGET_TO_CONNECT_WAL_URL   = "http://192.168.0.2"
+TARGET_TO_CONNECT_WAL_URL   = "http://192.168.0.2/login?admin"
 
 DETECT_CONNECT_ALIVE_TIME   = 10
 OPEN_PAGE_WAITE_TIME        = 3
@@ -55,12 +59,11 @@ def connect(url: str, account: str, password: str) -> None:
 
     try:
 
-        '''
-            only in selenium version below v4.6.0
-            can use below code
-        '''
         option = webdriver.ChromeOptions()
-        option.add_experimental_option("excludeSwitches", ["enable-logging"])
+        option.add_experimental_option("excludeSwitches", ["enable-automation"])
+        option.add_experimental_option('useAutomationExtension', False)
+        option.add_experimental_option("prefs", {"profile.password_manager_enabled": False, "credentials_enable_service": False})
+
         driver = webdriver.Chrome(executable_path = "./chromedriver.exe", options = option)
 
     except Exception as e:
@@ -70,25 +73,10 @@ def connect(url: str, account: str, password: str) -> None:
         sys.stdout.write(f"system DETAIL:\t {e}\n\n")
         sys.stdout.write("system INFO:\t program is going to shutdown. pls using popular browser.\n")
 
-        # try:
-
-        #     driver = webdriver.Chrome("./firefoxdriver.exe")
-
-        # except Exception as e:
-
-        #     sys.stdout.write("system ERROR:\t error on LINE <58>\n")
-        #     sys.stdout.write("system ERROR:\t cannot open Firefox browser.\n")
-        #     sys.stdout.write(f"system DETAIL:\t {e}\n\n")
-        #     sys.stdout.write("system INFO:\t program is going to shutdown. pls using popular browser.\n")
-
-        # else:
-
-        #     sys.stdout.write("system INFO:\t successfully open FireFox driver.\n")
-
     else:
 
-        sys.stdout.write("system INFO:\t successfully open Chrome driver.\n")
-        sys.stdout.write("system INFO:\t now is going to open FireFox.\n")
+        sys.stdout.write("system OK:\t successfully open Chrome driver.\n")
+        sys.stdout.write("system OK:\t now is going to open FireFox.\n")
 
     try:
 
@@ -104,7 +92,7 @@ def connect(url: str, account: str, password: str) -> None:
 
     else:
 
-        sys.stdout.write(f"system INFO:\t successfully connect target url. {url}\n")
+        sys.stdout.write(f"system OK:\t successfully connect target url. {url}\n")
 
     try:
 
@@ -120,7 +108,7 @@ def connect(url: str, account: str, password: str) -> None:
 
     else:
 
-        sys.stdout.write("system INFO:\t successfully find input field and bottom.\n")
+        sys.stdout.write("system OK:\t successfully find input field and bottom.\n")
 
     try:
 
@@ -136,7 +124,7 @@ def connect(url: str, account: str, password: str) -> None:
 
     else:
 
-        sys.stdout.write("system INFO:\t successfully input account and password information.\n")
+        sys.stdout.write("system OK:\t successfully input account and password information.\n")
 
     try:
 
@@ -151,7 +139,7 @@ def connect(url: str, account: str, password: str) -> None:
 
     else:
 
-        sys.stdout.write("system ERROR:\t successfully waiting website get and refresh information.\n")
+        sys.stdout.write("system OK:\t successfully waiting website get and refresh information.\n")
 
     try:
 
@@ -166,7 +154,7 @@ def connect(url: str, account: str, password: str) -> None:
 
     else:
 
-        sys.stdout.write("system INFO: successfully send account & password information.\n")
+        sys.stdout.write("system OK : successfully send account & password information.\n")
 
     try:
         
@@ -181,7 +169,7 @@ def connect(url: str, account: str, password: str) -> None:
 
     else:
 
-        sys.stdout.write("system INFO: successfully quit selenium browser.\n")
+        sys.stdout.write("system OK: successfully quit selenium browser.\n")
 
     return
     
@@ -203,6 +191,8 @@ def detect_connection(url: str) -> bool:
         return False
 
     else:
+
+        sys.stdout.write("system OK:\t successfully get WAL.\n")
 
         return True
 
@@ -247,7 +237,8 @@ def main() -> None:
 
         else:
 
-            sys.stdout.write("system ERROR:\t successfully waiting website get and refresh information.\n")
+            pass
+            # sys.stdout.write("system OK:\t successfully.\n")
 
         try:
 
@@ -262,7 +253,8 @@ def main() -> None:
 
         else:
 
-            sys.stdout.write("system ERROR:\t successfully waiting website get and refresh information.\n")
+            # sys.stdout.write("system OK:\t successfully.\n")
+            pass
 
         detection_times += 1
 
