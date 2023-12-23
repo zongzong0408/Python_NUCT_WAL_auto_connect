@@ -4,12 +4,13 @@
     using Python 3.7.0
     using Windows 11 Home
     
-    using selenium 4.6.0
-    using urllib 1.2.0
+    using selenium 3.14
+    using urllib 1.2.01
 
     using Chrome browser driver
 """
 
+from inspect import currentframe, getframeinfo
 import requests
 import time
 import sys
@@ -17,9 +18,11 @@ import os
 
 try:
     
-    from selenium import webdriver
-    from selenium.webdriver.chrome.service import Service
-    from webdriver_manager.chrome import ChromeDriverManager
+    from selenium import webdriver                              # this for version below v4.6.0
+    # from selenium.webdriver.chrome.service import Service
+    # from webdriver_manager.chrome import ChromeDriverManager
+
+    sys.stdout.write("system OK:\t successfully input selenium module.\n\n")
 
 except Exception as e:
 
@@ -29,10 +32,6 @@ except Exception as e:
     sys.stdout.write("system INFO:\t visit https://pypi.org/project/selenium/ to get more information.\n")
     sys.stdout.write("system INFO:\t you can run <$: pip install selenium > in your terminal to quick install package.\n")
     sys.stdout.write("system INFO:\t after that you need install the drive match you target browser then that's all.\n")
-
-else:
-
-    sys.stdout.write("system OK:\t successfully input selenium module.\n\n")
 
 """
     constant values description
@@ -46,7 +45,7 @@ else:
 """
 
 TEST_IS_CONNECT_WAL_URL     = "https://www.google.com"
-TARGET_TO_CONNECT_WAL_URL   = "http://192.168.0.2/login?admin"
+TARGET_TO_CONNECT_WAL_URL   = "http://172.16.170.254/login?admin"
 
 DETECT_CONNECT_ALIVE_TIME   = 10
 OPEN_PAGE_WAITE_TIME        = 3
@@ -62,7 +61,12 @@ def connect(url: str, account: str, password: str) -> None:
     try:
 
         a = time.time()
-        driver = webdriver.Chrome(service = Service(ChromeDriverManager().install()))
+        
+        # driver = webdriver.Chrome(service = Service(ChromeDriverManager().install()))
+        option = webdriver.ChromeOptions()
+        option.add_experimental_option("excludeSwitches", ["enable-logging"])
+        driver = webdriver.Chrome(options = option)
+        
         b = time.time()
         init = round(b - a)
 
@@ -71,10 +75,11 @@ def connect(url: str, account: str, password: str) -> None:
 
     except Exception as e:
 
-        sys.stdout.write("system ERROR:\t error on LINE <58>\n")
+        frameinfo = getframeinfo(currentframe())
+        sys.stdout.write(f"system ERROR:\t error on LINE <{frameinfo.lineno}>\n")
         sys.stdout.write("system ERROR:\t cannot open Chrome browser.\n")
         sys.stdout.write(f"system DETAIL:\t {e}\n\n")
-        sys.stdout.write("system INFO:\t program is going to shutdown. pls using popular browser.\n")
+        sys.stdout.write("system INFO:\t ...\n")
         # sys.stdout.write("system OK:\t now is going to open FireFox.\n")
 
     try:
@@ -86,12 +91,18 @@ def connect(url: str, account: str, password: str) -> None:
 
     except Exception as e:
 
-        sys.stdout.write("system ERROR:\t error on LINE <73>\n")
-        sys.stdout.write(f"system ERROR:\t cannot connect your target url, error http code {requests.get(url).status_code}.\n")
-        sys.stdout.write(f"system DETAIL:\t {e}\n\n")
-        sys.stdout.write(f"system INFO:\t you are trying connect {url}, pls try another LAN IP.\n")
+        frameinfo = getframeinfo(currentframe())
+        sys.stdout.write(f"system ERROR:\t error on LINE <{frameinfo.lineno}>\n")
+        
+        status_code = get_http_code(url)
 
-        driver.close()
+        if (status_code != 200):
+
+            sys.stdout.write(f"system ERROR:\t cannot connect your target url, error http code {status_code}.\n")
+            sys.stdout.write(f"system DETAIL:\t {e}\n\n")
+            sys.stdout.write(f"system INFO:\t you are trying connect {url}, pls try another LAN IP.\n")
+
+        driver.quit()
 
     try:
 
@@ -101,8 +112,9 @@ def connect(url: str, account: str, password: str) -> None:
         sys.stdout.write("system OK:\t successfully find input field and bottom.\n")
 
     except Exception as e:
-    
-        sys.stdout.write("system ERROR:\t error on LINE <91>\n")
+        
+        frameinfo = getframeinfo(currentframe())
+        sys.stdout.write(f"system ERROR:\t error on LINE <{frameinfo.lineno}>\n")
         sys.stdout.write("system ERROR:\t cannot find input field and bottom.\n")
         sys.stdout.write(f"system DETAIL:\t {e}\n\n")
         sys.stdout.write("system INFO:\t pls find available and correct input field XPath.\n")
@@ -115,11 +127,11 @@ def connect(url: str, account: str, password: str) -> None:
         sys.stdout.write("system OK:\t successfully input account and password information.\n")
 
     except Exception as e:
-    
-        sys.stdout.write("system ERROR:\t error on LINE <104 & 105>\n")
+        
+        frameinfo = getframeinfo(currentframe())
+        sys.stdout.write(f"system ERROR:\t error on LINE <{frameinfo.lineno}>\n")
         sys.stdout.write("system ERROR:\t cannot insert account and password data to input field.\n")
         sys.stdout.write(f"system DETAIL:\t {e}\n\n")
-        sys.stdout.write("system INFO:\t pls find available and correct input field XPath.\n")
 
     try:
 
@@ -129,7 +141,8 @@ def connect(url: str, account: str, password: str) -> None:
 
     except Exception as e:
 
-        sys.stdout.write("system ERROR:\t error on LINE <120>\n")
+        frameinfo = getframeinfo(currentframe())
+        sys.stdout.write(f"system ERROR:\t error on LINE <{frameinfo.lineno}>\n")
         sys.stdout.write("system ERROR:\t cannot let python script sleeping.\n")
         sys.stdout.write(f"system DETAIL:\t {e}\n\n")
         sys.stdout.write("system INFO:\t pls input correct sleep time { time belongs to R }.\n")
@@ -142,7 +155,8 @@ def connect(url: str, account: str, password: str) -> None:
 
     except Exception as e:
 
-        sys.stdout.write("system ERROR:\t error on LINE <135>\n")
+        frameinfo = getframeinfo(currentframe())
+        sys.stdout.write(f"system ERROR:\t error on LINE <{frameinfo.lineno}>\n")
         sys.stdout.write("system ERROR:\t cannot click input bottom.\n")
         sys.stdout.write(f"system DETAIL:\t {e}\n\n")
         sys.stdout.write("system INFO:\t pls input correct sleep time {  belongs to R }.\n")
@@ -155,7 +169,8 @@ def connect(url: str, account: str, password: str) -> None:
 
     except Exception as e:
 
-        sys.stdout.write("system ERROR:\t error on LINE <150>\n")
+        frameinfo = getframeinfo(currentframe())
+        sys.stdout.write(f"system ERROR:\t error on LINE <{frameinfo.lineno}>\n")
         sys.stdout.write("system ERROR:\t cannot quit selenium browser.\n")
         sys.stdout.write(f"system DETAIL:\t {e}\n\n")
         sys.stdout.write("system INFO:\t pls quit it by yourself or shutdown program.\n")
@@ -164,30 +179,54 @@ def connect(url: str, account: str, password: str) -> None:
     
 def detect_connection(url: str) -> bool:
 
-    status_code = 404
+    status_code = get_http_code(url)
 
-    try:
-
-        status_code = requests.get(url).status_code
+    if status_code == 200:
 
         sys.stdout.write("system OK:\t successfully get WAL.\n")
-    
-    except Exception:
 
-        sys.stdout.write("system ERROR:\t error on LINE <171>\n")
+        return True
+    
+    else:
+
         sys.stdout.write(f"system ERROR:\t cannot ping {url}, make sure WAL connection is available.\n")
         sys.stdout.write(f"system DETAIL:\t {status_code}\n\n")
         sys.stdout.write("system INFO:\t detect WAL connection is failed. the program is going to reconnect WAL.\n")
 
-        return False
+        return False 
 
-        return True
+def detect_http_connection(url: str) -> int:
+
+    try:
+
+        return requests.get(TEST_IS_CONNECT_WAL_URL).status_code
+
+    except requests.exceptions.HTTPError as e:
+    
+        return e
+    
+    except requests.exceptions.SSLError as e:
+    
+        return e
+    
+    except requests.exceptions.ConnectionError as e:
+    
+        return e
+    
+    except requests.exceptions.Timeout as e:
+    
+        return e
+
+def add_environment_variable_path() -> bool:
+
+    os.path
 
 def main() -> None:
 
     if (LOGIN_ACCOUNT["account"] == "..." or LOGIN_ACCOUNT["password"] == "..."):
 
-        sys.stdout.write("system ERROR:\t error on LINE <188>\n")
+        frameinfo = getframeinfo(currentframe())
+        sys.stdout.write(f"system ERROR:\t error on LINE <{frameinfo.lineno}>\n")
         sys.stdout.write("system ERROR:\t your are not input login account & password yet.\n")
         sys.stdout.write(f"system INFO:\t pls key your data to LOGIN_ACCOUNT[] list.\n")
 
@@ -200,8 +239,8 @@ def main() -> None:
 
         if (detect_connection(TEST_IS_CONNECT_WAL_URL) != False):
             
-            sys.stdout.write("system ERROR:\t cannot connect WAL.\n")
-            sys.stdout.write(f"system INFO:\t program will finished reconnect WAL after {OPEN_PAGE_WAITE_TIME} times.\n")
+            sys.stdout.write("system ERROR:\t program cannot connect WAL.\n")
+            sys.stdout.write("system INFO:\t program is trying reconnect WAL.\n")
 
             try:
                 
@@ -209,69 +248,86 @@ def main() -> None:
             
             except Exception as e:
 
-                sys.stdout.write("system ERROR:\t error on LINE <200>\n")
+                frameinfo = getframeinfo(currentframe())
+                sys.stdout.write(f"system ERROR:\t error on LINE <{frameinfo.lineno}>\n")
                 sys.stdout.write("system ERROR:\t cannot run function -> connect()\n")
                 sys.stdout.write(f"system DETAIL:\t {e}\n\n")
 
+                sys.stdout.write("system ERROR:\t cannot connect WAL.\n")
+                sys.stdout.write(f"system INFO:\t program will finished reconnect WAL after {OPEN_PAGE_WAITE_TIME} seconds.\n\n")
+                time.sleep(OPEN_PAGE_WAITE_TIME)
+
                 # break
 
-        time_tuple  = time.localtime()
-        time_string = time.strftime("%m/%d/%Y, %H:%M:%S", time_tuple)
-        sys.stdout.write(f"system INFO:\t (now time: {time_string}) WAL connection is all well.\n")
-        sys.stdout.write(f"system INFO:\t it is going to check connection after {DETECT_CONNECT_ALIVE_TIME} seconds. (detection times {detection_times})\n")
-        counting_end_time = time.time()
-        
-        try:
+                while detect_connection(TEST_IS_CONNECT_WAL_URL) == False:
 
-            sys.stdout.write(f"system INFO:\t program has already run {round((counting_end_time - counting_start_time) / 60 / 60)} hours.\n\n")
+                    sys.stdout.write("system ERROR:\t cannot connect WAL.\n")
+                    sys.stdout.write(f"system INFO:\t program will finished reconnect WAL after {OPEN_PAGE_WAITE_TIME} seconds.\n\n")
+                    time.sleep(OPEN_PAGE_WAITE_TIME)
 
-        except Exception as e:
+        else:
 
-            sys.stdout.write("system ERROR:\t error on LINE <216>\n")
-            sys.stdout.write("system ERROR:\t cannot let python script sleeping.\n")
-            sys.stdout.write(f"system DETAIL:\t {e}\n\n")
-            sys.stdout.write("system INFO:\t pls input correct sleep time { time belongs to R }.\n")
-
-        try:
-
-            time.sleep(DETECT_CONNECT_ALIVE_TIME)
-
-        except Exception as e:
-
-            sys.stdout.write("system ERROR:\t error on LINE <231>\n")
-            sys.stdout.write("system ERROR:\t cannot let python script sleeping.\n")
-            sys.stdout.write(f"system DETAIL:\t {e}\n\n")
-            sys.stdout.write("system INFO:\t pls input correct sleep time { time belongs to R }.\n")
-
-        detection_times += 1
-
-        if (detection_times >= CLEAR_TERMINAL_SCR_TIMES):
+            time_tuple  = time.localtime()
+            time_string = time.strftime("%m/%d/%Y, %H:%M:%S", time_tuple)
+            sys.stdout.write(f"system INFO:\t (now time: {time_string}) WAL connection is all well.\n")
+            sys.stdout.write(f"system INFO:\t it is going to check connection after {DETECT_CONNECT_ALIVE_TIME} seconds. (detection times {detection_times})\n")
+            counting_end_time = time.time()
             
             try:
-            
-                os.system("cls")
-            
+
+                sys.stdout.write(f"system INFO:\t program has already run {round((counting_end_time - counting_start_time) / 60 / 60)} hours.\n\n")
+
             except Exception as e:
-            
-                sys.stdout.write("system ERROR:\t error on LINE <250>\n")
-                sys.stdout.write("system ERROR:\t cannot clear terminal screen.\n")
+
+                frameinfo = getframeinfo(currentframe())
+                sys.stdout.write(f"system ERROR:\t error on LINE <{frameinfo.lineno}>\n")
+                sys.stdout.write("system ERROR:\t cannot let python script sleeping.\n")
                 sys.stdout.write(f"system DETAIL:\t {e}\n\n")
-                sys.stdout.write("system INFO:\t this program is developed under Windows system, if <cls> command isn't working, then it's going to run <clear> command.\n")
+                sys.stdout.write("system INFO:\t pls input correct sleep time { time belongs to R }.\n")
 
+            try:
+
+                time.sleep(DETECT_CONNECT_ALIVE_TIME)
+
+            except Exception as e:
+
+                frameinfo = getframeinfo(currentframe())
+                sys.stdout.write(f"system ERROR:\t error on LINE <{frameinfo.lineno}>\n")
+                sys.stdout.write("system ERROR:\t cannot let python script sleeping.\n")
+                sys.stdout.write(f"system DETAIL:\t {e}\n\n")
+                sys.stdout.write("system INFO:\t pls input correct sleep time { time belongs to R }.\n")
+
+            detection_times += 1
+
+            if (detection_times >= CLEAR_TERMINAL_SCR_TIMES):
+                
                 try:
-            
-                    os.system("clear")
-
+                
+                    os.system("cls")
+                
                 except Exception as e:
-                    
-                    sys.stdout.write("system ERROR:\t error on LINE <261>\n")
+                
+                    frameinfo = getframeinfo(currentframe())
+                    sys.stdout.write(f"system ERROR:\t error on LINE <{frameinfo.lineno}>\n")
                     sys.stdout.write("system ERROR:\t cannot clear terminal screen.\n")
                     sys.stdout.write(f"system DETAIL:\t {e}\n\n")
-                    sys.stdout.write("system INFO:\t pls using Windows or Linux system, make sure that is popular OS. the program cannot clear terminal screen.\n")
+                    sys.stdout.write("system INFO:\t this program is developed under Windows system, if <cls> command isn't working, then it's going to run <clear> command.\n")
 
-            finally:
+                    try:
+                
+                        os.system("clear")
 
-                detection_times = 0
+                    except Exception as e:
+
+                        frameinfo = getframeinfo(currentframe())              
+                        sys.stdout.write(f"system ERROR:\t error on LINE <{frameinfo.lineno}>\n")
+                        sys.stdout.write("system ERROR:\t cannot clear terminal screen.\n")
+                        sys.stdout.write(f"system DETAIL:\t {e}\n\n")
+                        sys.stdout.write("system INFO:\t pls using Windows or Linux system, make sure that is popular OS. the program cannot clear terminal screen.\n")
+
+                finally:
+
+                    detection_times = 0
 
     # return
 
