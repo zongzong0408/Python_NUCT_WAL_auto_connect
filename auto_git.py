@@ -3,6 +3,8 @@ from datetime import datetime
 
 def git_auto_commit_push(repo_path, commit_message):
 
+    print(f"system INFO:\t start git process.")
+
     try:
 
         os.chdir(repo_path)
@@ -11,13 +13,13 @@ def git_auto_commit_push(repo_path, commit_message):
 
         os.system(f'git commit -m "{commit_message}"')
 
-        os.system('git push')
+        os.system('git push origin main')
 
-        print("Git commit and push successful!")
+        print("\nsystem OK:\t git commit and push successful!")
 
     except Exception as e:
 
-        print("An error occurred:", e)
+        print(f"system DETAIL:\t {e}")
 
 # git_repo_path = input("Enter the path to your Git repository: ")
 git_repo_path = "D:\Code\GitHub\zongzongchu0408@gmail.com\Python_NUCT_WAL_auto_connect"
