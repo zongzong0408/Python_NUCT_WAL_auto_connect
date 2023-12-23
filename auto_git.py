@@ -3,7 +3,7 @@ from datetime import datetime
 
 def git_auto_commit_push(repo_path, commit_message):
 
-    print(f"system INFO:\t start git process.")
+    print(f"\nsystem INFO:\t start git process.\n")
 
     try:
 
