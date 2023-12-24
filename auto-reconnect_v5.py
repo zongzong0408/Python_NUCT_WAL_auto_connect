@@ -12,15 +12,14 @@
 
 from inspect import currentframe, getframeinfo
 import requests
+import shutil
 import time
 import sys
 import os
 
 try:
     
-    from selenium import webdriver                              # this for version below v4.6.0
-    # from selenium.webdriver.chrome.service import Service
-    # from webdriver_manager.chrome import ChromeDriverManager
+    from selenium import webdriver
 
     sys.stdout.write("system OK:\t successfully input selenium module.\n\n")
 
@@ -45,7 +44,7 @@ except Exception as e:
 """
 
 TEST_IS_CONNECT_WAL_URL     = "https://www.google.com"
-TARGET_TO_CONNECT_WAL_URL   = "http://172.16.170.254/login?admin"
+TARGET_TO_CONNECT_WAL_URL   = "172.16.170.254"
 
 DETECT_CONNECT_ALIVE_TIME   = 10
 OPEN_PAGE_WAITE_TIME        = 3
@@ -62,7 +61,6 @@ def connect(url: str, account: str, password: str) -> None:
 
         a = time.time()
         
-        # driver = webdriver.Chrome(service = Service(ChromeDriverManager().install()))
         option = webdriver.ChromeOptions()
         option.add_experimental_option("excludeSwitches", ["enable-logging"])
         driver = webdriver.Chrome(options = option)
@@ -84,7 +82,7 @@ def connect(url: str, account: str, password: str) -> None:
 
     try:
 
-        driver.implicitly_wait(5)
+        driver.implicitly_wait(OPEN_PAGE_WAITE_TIME)
         driver.get(url)
 
         sys.stdout.write(f"system OK:\t successfully connect target url. {url}\n")
@@ -94,7 +92,7 @@ def connect(url: str, account: str, password: str) -> None:
         frameinfo = getframeinfo(currentframe())
         sys.stdout.write(f"system ERROR:\t error on LINE <{frameinfo.lineno}>\n")
         
-        status_code = get_http_code(url)
+        status_code = detect_http_connection(url)
 
         if (status_code != 200):
 
@@ -126,26 +124,16 @@ def connect(url: str, account: str, password: str) -> None:
 
         sys.stdout.write("system OK:\t successfully input account and password information.\n")
 
+        time.sleep(OPEN_PAGE_WAITE_TIME)
+
+        sys.stdout.write("system OK:\t successfully waiting website get and refresh information.\n")
+
     except Exception as e:
         
         frameinfo = getframeinfo(currentframe())
         sys.stdout.write(f"system ERROR:\t error on LINE <{frameinfo.lineno}>\n")
         sys.stdout.write("system ERROR:\t cannot insert account and password data to input field.\n")
         sys.stdout.write(f"system DETAIL:\t {e}\n\n")
-
-    try:
-
-        time.sleep(OPEN_PAGE_WAITE_TIME)
-
-        sys.stdout.write("system OK:\t successfully waiting website get and refresh information.\n")
-
-    except Exception as e:
-
-        frameinfo = getframeinfo(currentframe())
-        sys.stdout.write(f"system ERROR:\t error on LINE <{frameinfo.lineno}>\n")
-        sys.stdout.write("system ERROR:\t cannot let python script sleeping.\n")
-        sys.stdout.write(f"system DETAIL:\t {e}\n\n")
-        sys.stdout.write("system INFO:\t pls input correct sleep time { time belongs to R }.\n")
 
     try:
 
@@ -179,7 +167,7 @@ def connect(url: str, account: str, password: str) -> None:
     
 def detect_connection(url: str) -> bool:
 
-    status_code = get_http_code(url)
+    status_code = detect_http_connection(url)
 
     if status_code == 200:
 
@@ -203,32 +191,84 @@ def detect_http_connection(url: str) -> int:
 
     except requests.exceptions.HTTPError as e:
     
-        return e
+        return 504
     
     except requests.exceptions.SSLError as e:
     
-        return e
+        return 495
     
     except requests.exceptions.ConnectionError as e:
     
-        return e
+        return 503
     
     except requests.exceptions.Timeout as e:
     
-        return e
+        return 408
 
-def add_environment_variable_path() -> bool:
+def copy_driver_and_add_path(file_dir: str) -> bool:
 
-    os.path
+    target_dir = os.path.join(os.path.dirname(sys.executable), "Scripts", os.path.basename(file_dir))
+
+    try:
+    
+        shutil.copyfile(file_dir, target_dir)
+
+        sys.stdout.write(f"system OK:\t file '{file_dir}' copied to '{target_dir}' successfully.\n")
+
+    except FileNotFoundError:
+    
+        sys.stdout.write("system ERROR:\t file not found!\n")
+    
+        return False
+
+    except shutil.SameFileError:
+    
+        sys.stdout.write("system ERROR:\t source and destination are the same file.\n")
+
+        return False
+
+    except shutil.IsADirectoryError:
+    
+        sys.stdout.write("system ERROR:\t destination is a directory.\n")
+        
+        return False
+
+    _path = os.environ.get("PATH", "")
+
+    if target_dir not in _path:
+
+        os.environ["PATH"] = f"{target_dir}"
+        sys.stdout.write(f"system OK:\t script path '{target_dir}' added to PATH variable successfully.\n")
+    
+        return True
+
+    else:
+
+        sys.stdout.write("system INFO:\t script path already exists in PATH variable.\n")
+
+        return True
 
 def main() -> None:
+
+    if (copy_driver_and_add_path("./driver/chromedriver.exe") == False):
+
+        frameinfo = getframeinfo(currentframe())
+        sys.stdout.write(f"system ERROR:\t error on LINE <{frameinfo.lineno}>\n")
+        sys.stdout.write("system ERROR:\t call function copy_driver_and_add_path() error.\n\n")
+        # sys.stdout.write(f"system DETAIL:\t {e}\n\n")
+
+        return
+    
+    else:
+
+        sys.stdout.write(f"succ\n")
 
     if (LOGIN_ACCOUNT["account"] == "..." or LOGIN_ACCOUNT["password"] == "..."):
 
         frameinfo = getframeinfo(currentframe())
         sys.stdout.write(f"system ERROR:\t error on LINE <{frameinfo.lineno}>\n")
         sys.stdout.write("system ERROR:\t your are not input login account & password yet.\n")
-        sys.stdout.write(f"system INFO:\t pls key your data to LOGIN_ACCOUNT[] list.\n")
+        sys.stdout.write(f"system INFO:\t pls key your data to LOGIN_ACCOUNT[] list.\n\n")
 
         return
 
