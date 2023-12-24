@@ -298,7 +298,8 @@ def copy_driver_and_add_path(file_dir: str) -> bool:
 def main() -> None:
 
     TARGET_TO_CONNECT_WAL_URL = f"http://{detect_default_gateway()}/"
-    sys.stdout.write(f"system INFO:\t the Default Gateway is '{TARGET_TO_CONNECT_WAL_URL}'\n")
+
+    sys.stdout.write(f"system INFO:\t the Default Gateway is '{TARGET_TO_CONNECT_WAL_URL}'\n\n")
 
     if (copy_driver_and_add_path("./driver/chromedriver.exe") == False):
 
@@ -324,7 +325,7 @@ def main() -> None:
     
     else:
 
-        sys.stdout.write(f"system OK:\t successfully read ACCOUNT[] data.\n")
+        sys.stdout.write(f"system OK:\t successfully read ACCOUNT[] data.\n\n")
 
     counting_start_time = time.time()
     detection_times = 1
