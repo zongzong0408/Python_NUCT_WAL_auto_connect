@@ -12,6 +12,7 @@
 
 from inspect import currentframe, getframeinfo
 import requests
+import winreg
 import shutil
 import time
 import sys
@@ -43,7 +44,7 @@ except Exception as e:
     LOGIN_ACCOUNT               : (dic) the dictionary store your login account and password information.
 """
 
-TEST_IS_CONNECT_WAL_URL     = "https://www.google.com"
+TEST_IS_CONNECT_WAL_URL     = "https://www.google.com/"
 TARGET_TO_CONNECT_WAL_URL   = "172.16.170.254"
 
 DETECT_CONNECT_ALIVE_TIME   = 10
@@ -101,6 +102,7 @@ def connect(url: str, account: str, password: str) -> None:
             sys.stdout.write(f"system INFO:\t you are trying connect {url}, pls try another LAN IP.\n")
 
         driver.quit()
+        return
 
     try:
 
@@ -233,6 +235,24 @@ def copy_driver_and_add_path(file_dir: str) -> bool:
         
         return False
 
+    _key = winreg.Open(winreg.HKEY_CURRENT_USER, r"Environment", 0, winreg.KEY_ALL_ACCESS)
+    current_path_value, _ = winreg.QueryValueEx(_key, 'PATH')
+
+    if target_dir not in current_path_value:
+
+        new_path_value = f'{current_path_value};{target_dir}'
+        winreg.SetValueEx(_key, 'PATH', 0, winreg.REG_EXPAND_SZ, new_path_value)
+
+        print(f"Directory '{target_dir}' added to user's PATH variable.")
+
+    else:
+
+        print(f"Directory '{target_dir}' already exists in user's PATH variable.")
+
+    winreg.CloseKey(_key)
+
+    os.environ["PATH"] = new_path_value
+
     _path = os.environ.get("PATH", "")
 
     if target_dir not in _path:
@@ -261,16 +281,20 @@ def main() -> None:
     
     else:
 
-        sys.stdout.write(f"succ\n")
+        sys.stdout.write(f"system OK:\t successfully copy file and add path to PATH.\n")
 
     if (LOGIN_ACCOUNT["account"] == "..." or LOGIN_ACCOUNT["password"] == "..."):
 
         frameinfo = getframeinfo(currentframe())
         sys.stdout.write(f"system ERROR:\t error on LINE <{frameinfo.lineno}>\n")
         sys.stdout.write("system ERROR:\t your are not input login account & password yet.\n")
-        sys.stdout.write(f"system INFO:\t pls key your data to LOGIN_ACCOUNT[] list.\n\n")
+        sys.stdout.write(f"system INFO:\t pls _key your data to LOGIN_ACCOUNT[] list.\n\n")
 
         return
+    
+    else:
+
+        sys.stdout.write(f"system OK:\t successfully read ACCOUNT[] data.\n")
 
     counting_start_time = time.time()
     detection_times = 1
