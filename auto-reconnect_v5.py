@@ -11,12 +11,14 @@
 """
 
 from inspect import currentframe, getframeinfo
+import subprocess
 import requests
 import winreg
 import shutil
 import time
 import sys
 import os
+import re
 
 try:
     
@@ -207,6 +209,29 @@ def detect_http_connection(url: str) -> int:
     
         return 408
 
+def detect_default_gateway() -> str:
+
+    try:
+
+        output = subprocess.check_output(["ipconfig", "/all"], universal_newlines=True)
+        gateway_match = re.search(r"Default Gateway.*: ([\d.]+)", output)
+        
+        if gateway_match:
+    
+            return gateway_match.group(1)
+    
+        else:
+    
+            return None
+    
+    except subprocess.CalledProcessError as e:
+
+        frameinfo = getframeinfo(currentframe())
+        sys.stdout.write(f"system ERROR:\t error on LINE <{frameinfo.lineno}>\n")
+        sys.stdout.write(f"system DETAIL:\t {e}\n\n")
+        
+        return None
+
 def copy_driver_and_add_path(file_dir: str) -> bool:
 
     target_dir = os.path.join(os.path.dirname(sys.executable), "Scripts", os.path.basename(file_dir))
@@ -235,19 +260,21 @@ def copy_driver_and_add_path(file_dir: str) -> bool:
         
         return False
 
-    _key = winreg.Open(winreg.HKEY_CURRENT_USER, r"Environment", 0, winreg.KEY_ALL_ACCESS)
+    _key = winreg.OpenKey(winreg.HKEY_CURRENT_USER, r"Environment", 0, winreg.KEY_ALL_ACCESS)
     current_path_value, _ = winreg.QueryValueEx(_key, 'PATH')
 
     if target_dir not in current_path_value:
 
-        new_path_value = f'{current_path_value};{target_dir}'
-        winreg.SetValueEx(_key, 'PATH', 0, winreg.REG_EXPAND_SZ, new_path_value)
+        new_path_value = f"{current_path_value};{target_dir}"
+        winreg.SetValueEx(_key, "PATH", 0, winreg.REG_EXPAND_SZ, new_path_value)
 
-        print(f"Directory '{target_dir}' added to user's PATH variable.")
+        sys.stdout.write(f"system OK:\t directory '{target_dir}' added to user's PATH variable.\n")
 
     else:
 
-        print(f"Directory '{target_dir}' already exists in user's PATH variable.")
+        sys.stdout.write(f"system INFO:\t directory '{target_dir}' already exists in user's PATH variable.\n")
+
+        return None
 
     winreg.CloseKey(_key)
 
@@ -258,17 +285,20 @@ def copy_driver_and_add_path(file_dir: str) -> bool:
     if target_dir not in _path:
 
         os.environ["PATH"] = f"{target_dir}"
-        sys.stdout.write(f"system OK:\t script path '{target_dir}' added to PATH variable successfully.\n")
+        sys.stdout.write(f"system OK:\t script path '{target_dir}' added to PATH variable successfully.\n\n")
     
         return True
 
     else:
 
-        sys.stdout.write("system INFO:\t script path already exists in PATH variable.\n")
+        sys.stdout.write("system INFO:\t script path already exists in PATH variable.\n\n")
 
         return True
 
 def main() -> None:
+
+    TARGET_TO_CONNECT_WAL_URL = f"http://{detect_default_gateway()}/"
+    sys.stdout.write(f"system INFO:\t the Default Gateway is '{TARGET_TO_CONNECT_WAL_URL}'\n")
 
     if (copy_driver_and_add_path("./driver/chromedriver.exe") == False):
 
