@@ -22,12 +22,20 @@
 ```bash
 pip install selenium==4.6.0
 ```
+> 備註：檢測網路連線和獲得 HTTP 代碼。
 
 步驟 二：安裝相依模組。  
 
 ```bash
 pip install requests
 ```
+> 備註：獲得網路登入介面內網 IP 位置。
+
+```bash
+pip install subprocess
+```
+> 備註：獲得網路登入介面內網 IP 位置。
+
 
 步驟 三：`ssl` 的版本與 `urllib3` 不相容，[參見議題](https://stackoverflow.com/questions/76187256/importerror-urllib3-v2-0-only-supports-openssl-1-1-1-currently-the-ssl-modu)。  
 
