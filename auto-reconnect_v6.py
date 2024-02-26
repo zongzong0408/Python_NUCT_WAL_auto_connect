@@ -29,7 +29,6 @@ while (True):
         for line in ipconfig_lines:
             if "預設閘道" in line:
                 default_gateway = line.split(':')[-1].strip()
-                return default_gateway
         
         driver.get("http://172.16.170.254:1000/login?admin")
 
