@@ -8,7 +8,7 @@ def get_default_gateway():
         ipconfig_lines = ipconfig_result.split('\n')
         # Finding the line containing the default gateway
         for line in ipconfig_lines:
-            if 'Default Gateway' in line:
+            if '預設閘道' in line:
                 # Extracting the default gateway IP address
                 default_gateway = line.split(':')[-1].strip()
                 return default_gateway
