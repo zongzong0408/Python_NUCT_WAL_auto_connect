@@ -1,31 +1,42 @@
 from datetime import datetime
+import time
 import sys
 import os
 
-def git_auto_commit_push(repo_path, commit_message):
+def git_auto_commit_push(repo_path, commit_message) -> None:
 
-    print(f"\nsystem INFO:\t start git process.\n")
+    sys.stdout.write(f"\nsystem INFO:\t start git process.\n")
 
     try:
 
         os.chdir(repo_path)
-
         os.system('git add .')
-
         os.system(f'git commit -m "{commit_message}"')
-
         os.system('git push origin main')
-
-        print("\nsystem OK:\t git commit and push successful!")
+        
+        sys.stdout.write("\nsystem OK:\t git commit and push successful!")
 
     except Exception as e:
 
-        print(f"system DETAIL:\t {e}")
+        sys.stdout.write(f"system DETAIL:\t {e}")
 
-git_repo_path = os.getcwd()
-sys.stdout.write(f"{str(git_auto_commit_push)}")
+    else:
 
-current_time = datetime.now()
-commit_message = formatted_time = current_time.strftime("%Y/%m/%d %H:%M")
+        return
 
-git_auto_commit_push(git_repo_path, commit_message)
+def main() -> None:
+
+    while (True):
+
+        git_repo_path = os.getcwd()
+
+        current_time = datetime.now()
+        commit_message = current_time.strftime("%Y/%m/%d %H:%M")
+
+        git_auto_commit_push(git_repo_path, commit_message)
+
+        time.sleep(5)
+
+    # return
+  
+main()
