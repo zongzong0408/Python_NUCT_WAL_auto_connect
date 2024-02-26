@@ -43,10 +43,10 @@ while (True):
 
         driver.quit()
 
-        sys.stdout.write("恢復連接\n")
+        sys.stdout.write("恢復網路連接\n")
 
     else:
 
-        sys.stdout.write("連接正常\n")
+        sys.stdout.write("連接網路正常\n")
 
     time.sleep(3)
