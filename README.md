@@ -8,9 +8,14 @@
 
 - Windows Home 11
 - Python 3.7.0
-- selenium 3.0 or selenium >=4.5
 - urllib3 1.26.6
 - requests
+
+- selenium 3.0
+> ji
+
+- selenium >=4.5
+> d
 
 
 ## 如何執行
