@@ -7,15 +7,17 @@ import re
 
 while (True):
 
-    ok = 404
+    http_code = 404
     
     try:
-        ok = requests.get("https://www.google.com").status_code
+
+        http_code = requests.get("https://www.google.com").status_code
+    
     except Exception as e:
+        
         pass
 
-
-    if (ok != 200):
+    if (http_code != 200):
 
         sys.stdout.write("連接失敗\n")
 
