@@ -1,0 +1,50 @@
+from selenium import webdriver
+import subprocess
+import requests
+import time
+import sys
+import re
+
+while (True):
+
+    ok = 404
+    
+    try:
+        ok = requests.get("https://www.google.com").status_code
+    except Exception as e:
+        pass
+
+
+    if (ok != 200):
+
+        sys.stdout.write("連接失敗\n")
+
+        driver = webdriver.Chrome()
+
+        time.sleep(3)
+        
+        output = subprocess.check_output(["ipconfig", "/all"], universal_newlines=True)
+        gateway_match = re.search(r"Default Gateway.*: ([\d.]+)", output)
+        sys.stdout.write(f"{gateway_match}")
+        
+        time.sleep(5)
+        
+        driver.get("http://172.16.170.254:1000/login?admin")
+
+        username_field = driver.find_element("name", "username")
+        password_field = driver.find_element("name", "password")
+
+        username_field.send_keys("ncutvip@ncut.edu.tw")
+        password_field.send_keys("23924505")
+
+        username_field = driver.find_element("xpath", '//*[@id="login_form_div"]/form/table/tbody/tr[1]/td[2]/button').click()
+
+        driver.quit()
+
+        sys.stdout.write("恢復連接\n")
+
+    else:
+
+        sys.stdout.write("連接正常\n")
+
+    time.sleep(3)

@@ -47,7 +47,7 @@ except Exception as e:
 """
 
 TEST_IS_CONNECT_WAL_URL     = "https://www.google.com/"
-TARGET_TO_CONNECT_WAL_URL   = "172.16.170.254"
+TARGET_TO_CONNECT_WAL_URL   = "http://172.16.170.254:1000/fgtauth?"
 
 DETECT_CONNECT_ALIVE_TIME   = 10
 OPEN_PAGE_WAITE_TIME        = 3
@@ -72,7 +72,7 @@ def connect(url: str, account: str, password: str) -> None:
         init = round(b - a)
 
         sys.stdout.write(f"system INFO:\t initialize Chrome drive cost {init} second(s).\n")
-        sys.stdout.write("system OK:\t successfully open Chrome driver.\n")
+        sys.stdout.write("system OK:\t successfully open Chrome driver.\n\n")
 
     except Exception as e:
 
@@ -80,15 +80,15 @@ def connect(url: str, account: str, password: str) -> None:
         sys.stdout.write(f"system ERROR:\t error on LINE <{frameinfo.lineno}>\n")
         sys.stdout.write("system ERROR:\t cannot open Chrome browser.\n")
         sys.stdout.write(f"system DETAIL:\t {e}\n\n")
-        sys.stdout.write("system INFO:\t ...\n")
+        sys.stdout.write("system INFO:\t ...\n\n")
         # sys.stdout.write("system OK:\t now is going to open FireFox.\n")
 
     try:
 
-        driver.implicitly_wait(OPEN_PAGE_WAITE_TIME)
+        # driver.implicitly_wait(OPEN_PAGE_WAITE_TIME)
         driver.get(url)
 
-        sys.stdout.write(f"system OK:\t successfully connect target url. {url}\n")
+        sys.stdout.write(f"system OK:\t successfully connect target url. {url}\n\n")
 
     except Exception as e:
 
@@ -101,7 +101,12 @@ def connect(url: str, account: str, password: str) -> None:
 
             sys.stdout.write(f"system ERROR:\t cannot connect your target url, error http code {status_code}.\n")
             sys.stdout.write(f"system DETAIL:\t {e}\n\n")
-            sys.stdout.write(f"system INFO:\t you are trying connect {url}, pls try another LAN IP.\n")
+            sys.stdout.write(f"system INFO:\t you are trying connect {url}, pls try another LAN IP.\n\n")
+        
+        else:
+
+            sys.stdout.write(f"system OK:\t successfully get request {status_code}.\n")
+            sys.stdout.write(f"system INFO:\t you are already connected school WAL.\n")
 
         driver.quit()
         return
@@ -111,7 +116,7 @@ def connect(url: str, account: str, password: str) -> None:
         username_field = driver.find_element("name", "username")
         password_field = driver.find_element("name", "password")
 
-        sys.stdout.write("system OK:\t successfully find input field and bottom.\n")
+        sys.stdout.write("system OK:\t successfully find input field and bottom.\n\n")
 
     except Exception as e:
         
@@ -119,7 +124,7 @@ def connect(url: str, account: str, password: str) -> None:
         sys.stdout.write(f"system ERROR:\t error on LINE <{frameinfo.lineno}>\n")
         sys.stdout.write("system ERROR:\t cannot find input field and bottom.\n")
         sys.stdout.write(f"system DETAIL:\t {e}\n\n")
-        sys.stdout.write("system INFO:\t pls find available and correct input field XPath.\n")
+        sys.stdout.write("system INFO:\t pls find available and correct input field XPath.\n\n")
 
     try:
 
@@ -130,7 +135,7 @@ def connect(url: str, account: str, password: str) -> None:
 
         time.sleep(OPEN_PAGE_WAITE_TIME)
 
-        sys.stdout.write("system OK:\t successfully waiting website get and refresh information.\n")
+        sys.stdout.write("system OK:\t successfully waiting website get and refresh information.\n\n")
 
     except Exception as e:
         
@@ -143,7 +148,7 @@ def connect(url: str, account: str, password: str) -> None:
 
         username_field = driver.find_element("xpath", '//*[@id="login_form_div"]/form/table/tbody/tr[1]/td[2]/button').click()
 
-        sys.stdout.write("system OK : successfully send account & password information.\n")
+        sys.stdout.write("system OK : successfully send account & password information.\n\n")
 
     except Exception as e:
 
@@ -151,13 +156,13 @@ def connect(url: str, account: str, password: str) -> None:
         sys.stdout.write(f"system ERROR:\t error on LINE <{frameinfo.lineno}>\n")
         sys.stdout.write("system ERROR:\t cannot click input bottom.\n")
         sys.stdout.write(f"system DETAIL:\t {e}\n\n")
-        sys.stdout.write("system INFO:\t pls input correct sleep time {  belongs to R }.\n")
+        sys.stdout.write("system INFO:\t pls input correct sleep time {  belongs to R }.\n\n")
 
     try:
         
         driver.quit()
 
-        sys.stdout.write("system OK: successfully quit selenium browser.\n")
+        sys.stdout.write("system OK: successfully quit selenium browser.\n\n")
 
     except Exception as e:
 
@@ -165,7 +170,7 @@ def connect(url: str, account: str, password: str) -> None:
         sys.stdout.write(f"system ERROR:\t error on LINE <{frameinfo.lineno}>\n")
         sys.stdout.write("system ERROR:\t cannot quit selenium browser.\n")
         sys.stdout.write(f"system DETAIL:\t {e}\n\n")
-        sys.stdout.write("system INFO:\t pls quit it by yourself or shutdown program.\n")
+        sys.stdout.write("system INFO:\t pls quit it by yourself or shutdown program.\n\n")
 
     return
     
@@ -254,11 +259,11 @@ def copy_driver_and_add_path(file_dir: str) -> bool:
 
         return False
 
-    except shutil.IsADirectoryError:
+    # except shutil.IsADirectoryError:
     
-        sys.stdout.write("system ERROR:\t destination is a directory.\n")
+    #     sys.stdout.write("system ERROR:\t destination is a directory.\n")
         
-        return False
+    #     return False
 
     _key = winreg.OpenKey(winreg.HKEY_CURRENT_USER, r"Environment", 0, winreg.KEY_ALL_ACCESS)
     current_path_value, _ = winreg.QueryValueEx(_key, 'PATH')
@@ -297,13 +302,14 @@ def copy_driver_and_add_path(file_dir: str) -> bool:
 
 def main() -> None:
 
-    TARGET_TO_CONNECT_WAL_URL = f"http://{detect_default_gateway()}/"
+    TARGET_TO_CONNECT_WAL_URL = f"http://{detect_default_gateway()}:1000/fgtauth?"
 
     sys.stdout.write(f"system INFO:\t the Default Gateway is '{TARGET_TO_CONNECT_WAL_URL}'\n\n")
 
     if (copy_driver_and_add_path("./driver/chromedriver.exe") == False):
 
         frameinfo = getframeinfo(currentframe())
+
         sys.stdout.write(f"system ERROR:\t error on LINE <{frameinfo.lineno}>\n")
         sys.stdout.write("system ERROR:\t call function copy_driver_and_add_path() error.\n\n")
         # sys.stdout.write(f"system DETAIL:\t {e}\n\n")
@@ -332,10 +338,10 @@ def main() -> None:
 
     while True:
 
-        if (detect_connection(TEST_IS_CONNECT_WAL_URL) != False):
+        if (detect_connection(TEST_IS_CONNECT_WAL_URL) == False):
             
             sys.stdout.write("system ERROR:\t program cannot connect WAL.\n")
-            sys.stdout.write("system INFO:\t program is trying reconnect WAL.\n")
+            sys.stdout.write("system INFO:\t program is trying reconnect WAL.\n\n")
 
             try:
                 
