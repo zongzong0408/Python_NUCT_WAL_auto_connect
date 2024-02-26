@@ -29,7 +29,7 @@ pip install selenium==*
 ```
 > 備註：簡單方便輸入帳號密碼和送出表單。
 
-步驟 三：安裝相依模組。  
+步驟 三：安裝相依模組（`requests`、`subprocess`）。  
 
 ```bash
 pip install requests
