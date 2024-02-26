@@ -44,10 +44,9 @@ pip install subprocess
 pip install urllib3==1.26.6
 ```
 
-步驟 五：點擊 `auto-reconnect.py` 去啟動腳本，或使用終端機。
+步驟 五：點擊 `auto-reconnect.py` 去啟動腳本，或在資料夾內開啟終端機。
 
 ```bash
-在資料夾內開啟終端機
 python auto-reconnect.py
 ```
 
