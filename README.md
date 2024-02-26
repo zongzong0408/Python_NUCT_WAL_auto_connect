@@ -55,9 +55,14 @@ pip install urllib3==1.26.6
 | Chrome | https://chromedriver.chromium.org/downloads |
 | Firefox | https://github.com/mozilla/geckodriver/releases |
   
-步驟 六：點擊 `auto-reconnect.py` 去啟動腳本。
+步驟 六：啟動腳本。
 
-大功告成！它會自動執行，當你網路斷線，它會自動重新連線，過程非常快，不會有斷網的感覺，24/7執行。
+- 1. 點擊 `auto-reconnect.py`  
+---
+- 2. 在資料夾內開啟終端機
+        ```bash
+        python auto-reconnect.py
+        ```
 
 
 ## 版本差異
