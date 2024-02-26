@@ -27,8 +27,7 @@ while (True):
         ipconfig_result = subprocess.check_output(['ipconfig'], stderr = subprocess.STDOUT, shell = True, universal_newlines = True)
         ipconfig_lines = ipconfig_result.split('\n')
         for line in ipconfig_lines:
-            if '預設閘道' in line:
-                # Extracting the default gateway IP address
+            if "預設閘道" in line:
                 default_gateway = line.split(':')[-1].strip()
                 return default_gateway
         
