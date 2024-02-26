@@ -23,7 +23,7 @@ def git_auto_commit_push(repo_path, commit_message):
         print(f"system DETAIL:\t {e}")
 
 git_repo_path = os.getcwd()
-sys.stdout.write(git_auto_commit_push)
+sys.stdout.write(f"{git_auto_commit_push}")
 os.system("pause")
 
 current_time = datetime.now()
