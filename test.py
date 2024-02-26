@@ -1,4 +1,3 @@
-# import re
 import subprocess
 
 def get_default_gateway():

@@ -3,7 +3,6 @@ import subprocess
 import requests
 import time
 import sys
-import re
 
 while (True):
 
@@ -29,6 +28,7 @@ while (True):
         gateway_match = re.search(r"Default Gateway.*: ([\d.]+)", output)
         
         driver.get("http://172.16.170.254:1000/login?admin")
+
 
         username_field = driver.find_element("name", "username")
         password_field = driver.find_element("name", "password")
