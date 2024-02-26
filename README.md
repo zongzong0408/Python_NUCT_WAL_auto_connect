@@ -22,10 +22,10 @@
 
 步驟 一：如果沒有安裝 `Python` 請先[安裝](https://www.python.org/downloads/)，版本大於 `>= 3.7.0`。  
 
-步驟 一：使用 `selenium` 視覺化爬蟲模組（使用版本 `3.0`）。  
+步驟 一：使用 `selenium` 視覺化爬蟲模組（使用版本 `*`）。  
 
 ```bash
-pip install selenium==4.6.0
+pip install selenium==*
 ```
 > 備註：簡單方便輸入帳號密碼和送出表單。
 
