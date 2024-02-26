@@ -25,6 +25,7 @@ while (True):
         time.sleep(3)
         
         ipconfig_result = subprocess.check_output(['ipconfig'], stderr = subprocess.STDOUT, shell = True, universal_newlines = True)
+        ipconfig_lines = ipconfig_result.split('\n')
         gateway_match = re.search(r"Default Gateway.*: ([\d.]+)", output)
         
         driver.get("http://172.16.170.254:1000/login?admin")
