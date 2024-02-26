@@ -28,8 +28,6 @@ while (True):
         output = subprocess.check_output(["ipconfig", "/all"], universal_newlines=True)
         gateway_match = re.search(r"Default Gateway.*: ([\d.]+)", output)
         
-        time.sleep(3)
-        
         driver.get("http://172.16.170.254:1000/login?admin")
 
         username_field = driver.find_element("name", "username")
