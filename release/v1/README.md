@@ -16,14 +16,12 @@
 
 步驟 一：如果沒有安裝 `Python` 請先[安裝](https://www.python.org/downloads/)，版本大於 `>= 3.7.0`。  
 
-
 步驟 二：安裝 `selenium` 視覺化爬蟲模組（使用版本 `>= 4.5`）。  
 
 ```bash
 pip install selenium==4.5.0
 ```
 > 備註：簡單方便輸入帳號密碼和送出表單。
-
 
 步驟 三：安裝相依模組（`requests`、`subprocess`）。  
 
