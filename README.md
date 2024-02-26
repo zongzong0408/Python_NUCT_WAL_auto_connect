@@ -48,14 +48,14 @@ pip install subprocess
 pip install urllib3==1.26.6
 ```
 
-步驟 五：下載你所要開啟登入頁面的瀏覽器（推薦用你常用的瀏覽器，**驅動版本要與瀏覽器版本相符**）。
+步驟 五（非必須）：下載你所要開啟登入頁面的瀏覽器（推薦用你常用的瀏覽器，**驅動版本要與瀏覽器版本相符**）。
 
 | 版本 | 描述 |
 | ---- | ---- |
 | Chrome | https://chromedriver.chromium.org/downloads |
 | Firefox | https://github.com/mozilla/geckodriver/releases |
   
-步驟 四：點擊 `auto-reconnect.py` 去啟動腳本。
+步驟 六：點擊 `auto-reconnect.py` 去啟動腳本。
 
 大功告成！它會自動執行，當你網路斷線，它會自動重新連線，過程非常快，不會有斷網的感覺，24/7執行。
 
