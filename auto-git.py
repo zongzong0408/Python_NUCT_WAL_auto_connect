@@ -1,5 +1,6 @@
-import os
 from datetime import datetime
+import sys
+import os
 
 def git_auto_commit_push(repo_path, commit_message):
 
@@ -22,7 +23,8 @@ def git_auto_commit_push(repo_path, commit_message):
         print(f"system DETAIL:\t {e}")
 
 git_repo_path = os.getcwd()
-print(git_auto_commit_push)
+sys.stdout.write(git_auto_commit_push)
+os.system("pause")
 
 current_time = datetime.now()
 commit_message = formatted_time = current_time.strftime("%Y/%m/%d %H:%M")
