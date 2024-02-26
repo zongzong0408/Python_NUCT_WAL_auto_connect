@@ -10,7 +10,7 @@
 - Python 3.7.0
 - urllib3 1.26.6
 - requests
-
+---
 - selenium 3.0
 > 備註：需要下載驅動和設定路徑。
 
