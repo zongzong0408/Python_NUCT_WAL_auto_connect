@@ -30,7 +30,7 @@ while (True):
             if "預設閘道" in line:
                 default_gateway = line.split(':')[-1].strip()
         
-        driver.get("http://172.16.170.254:1000/login?admin")
+        driver.get(f"http://{default_gateway}:1000/login?admin")
 
 
         username_field = driver.find_element("name", "username")
