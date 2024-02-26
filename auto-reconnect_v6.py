@@ -19,7 +19,7 @@ while (True):
 
     if (http_code != 200):
 
-        sys.stdout.write("連接失敗\n")
+        sys.stdout.write("網路連接失敗\n")
 
         driver = webdriver.Chrome()
 
