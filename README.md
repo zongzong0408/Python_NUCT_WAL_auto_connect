@@ -55,6 +55,7 @@ pip install urllib3==1.26.6
 | v5 | 同上，使用 `Pyinstaller` 打包成 `.exe` |
 | v5 | 同上，使用 `Pyinstaller` 打包成 `.exe` |
 
+
 ## 貢獻
 
 都是自己寫的，哈哈，這頗簡單ㄚ。  
@@ -64,4 +65,4 @@ pip install urllib3==1.26.6
 ## 著作權
 
 此專案受到 [GPL-3.0](https://www.gnu.org/licenses/gpl-3.0.zh-tw.html) 保障。  
-Copyright © 2023 zong zong ( zongzong0408 )
+Copyright © 2024 zong zong ( zongzong0408 )
