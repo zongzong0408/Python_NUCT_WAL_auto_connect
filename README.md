@@ -12,7 +12,7 @@
 - requests
 
 - selenium 3.0
-> ji
+> 備註：需要下載驅動和設定路徑 
 
 - selenium >=4.5
 > d
