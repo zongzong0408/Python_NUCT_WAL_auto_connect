@@ -22,14 +22,14 @@
 ```bash
 pip install selenium==4.6.0
 ```
-> 備註：檢測網路連線和獲得 HTTP 代碼。
+> 備註：簡單方便輸入帳號密碼和送出表單。
 
 步驟 二：安裝相依模組。  
 
 ```bash
 pip install requests
 ```
-> 備註：獲得網路登入介面內網 IP 位置。
+> 備註：檢測網路連線和獲得 HTTP 代碼。
 
 ```bash
 pip install subprocess
