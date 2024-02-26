@@ -47,10 +47,11 @@ pip install urllib3==1.26.6
 步驟 五：啟動腳本。
 
 - 1. 點擊 `auto-reconnect.py`  
+---
 - 2. 在資料夾內開啟終端機
-```bash
-python auto-reconnect.py
-```
+        ```bash
+        python auto-reconnect.py
+        ```
 
 大功告成！它會自動執行，當你網路斷線，它會自動重新連線，過程非常快，不會有斷網的感覺，24/7執行。
 
