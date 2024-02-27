@@ -1,5 +1,5 @@
 # NUCT WAL auto connector 勤益科大網路連接腳本
-## v1 lightness version 輕量化版本
+## v2 lightness version 輕量化版本
 
 國立勤益科技大學，全自動連接網路腳本，開源程式碼，沒有任何技術專利，安心使用。  
 
