@@ -15,6 +15,7 @@ def git_commit_push(repo_path, commit_message) -> None:
         os.system("git push origin main")
         
         sys.stdout.write("\nsystem OK:\t git commit and push successful!\n\n")
+        sys.stdout.write("===============================================\n\n")
 
     except Exception as e:
 
