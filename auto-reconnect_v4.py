@@ -7,7 +7,7 @@
     using selenium 3.0.0
     using urllib 1.2.01
 
-    using ( Chrome || FireFox ) browser driver
+    using Chrome OR FireFox browser driver
 """
 
 import requests

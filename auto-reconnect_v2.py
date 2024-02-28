@@ -1,3 +1,15 @@
+"""
+    version C v3.2
+
+    using Python 3.7.0
+    using Windows 11 Home
+
+    using selenium 3.0.0
+    using urllib 1.2.01
+
+    using Chrome browser driver
+"""
+
 from selenium import webdriver
 import requests
 import time
