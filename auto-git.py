@@ -3,7 +3,7 @@ import time
 import sys
 import os
 
-def git_auto_commit_push(repo_path, commit_message) -> None:
+def git_commit_push(repo_path, commit_message) -> None:
 
     sys.stdout.write(f"\n\n\nsystem INFO:\t start git process.\n")
 
