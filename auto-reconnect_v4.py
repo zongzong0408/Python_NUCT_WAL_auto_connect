@@ -1,9 +1,9 @@
 """
-    version CF v4
+    version CF v4.0
 
     using Python 3.7.0
     using Windows 11 Home
-    using ( Chrome OR FireFox ) browser driver
+    using ( Chrome || FireFox ) browser driver
 """
 
 import requests
