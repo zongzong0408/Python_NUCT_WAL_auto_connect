@@ -1,5 +1,5 @@
 """
-    version C v3.2
+    version C v3.1s
 
     using Python 3.7.0
     using Windows 11 Home

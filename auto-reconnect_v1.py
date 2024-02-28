@@ -1,10 +1,21 @@
 """
+    version C v3.2
+
+    using Python 3.7.0
+    using Windows 11 Home
+
+    using selenium 3.0.0
+    using urllib 1.2.01
+
+    using Chrome browser driver
+"""
+
+"""
     精靈：自動化重連學校網路腳本
     時間：2023/08/08
     作者：zong zong
     緣由：...
 """
-# 開發中
 
 """
     regulation:
