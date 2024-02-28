@@ -5,7 +5,7 @@ import os
 
 def git_commit_push(repo_path, commit_message) -> None:
 
-    sys.stdout.write(f"\n\n\nsystem INFO:\t start git process.\n")
+    sys.stdout.write(f"\n\nsystem INFO:\t start git process.\n")
 
     try:
 
@@ -14,11 +14,11 @@ def git_commit_push(repo_path, commit_message) -> None:
         os.system(f"git commit -m '{commit_message}'")
         os.system("git push origin main")
         
-        sys.stdout.write("\nsystem OK:\t git commit and push successful!")
+        sys.stdout.write("\nsystem OK:\t git commit and push successful!\n\n")
 
     except Exception as e:
 
-        sys.stdout.write(f"system DETAIL:\t {e}")
+        sys.stdout.write(f"system DETAIL:\t {e}\n\n")
 
     else:
 
