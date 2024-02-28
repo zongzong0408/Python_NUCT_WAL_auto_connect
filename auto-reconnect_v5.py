@@ -4,7 +4,7 @@
     using Python 3.7.0
     using Windows 11 Home
     
-    using selenium 3.14
+    using selenium 4.5.0
     using urllib 1.2.01
 
     using Chrome browser driver
@@ -18,7 +18,7 @@ import shutil
 import time
 import sys
 import os
-import re
+# import re
 
 try:
     
@@ -47,7 +47,7 @@ except Exception as e:
 """
 
 TEST_IS_CONNECT_WAL_URL     = "https://www.google.com/"
-TARGET_TO_CONNECT_WAL_URL   = "http://172.16.170.254:1000/fgtauth?"
+TARGET_TO_CONNECT_WAL_URL   = "http://172.16.170.254:1000/login?"
 
 DETECT_CONNECT_ALIVE_TIME   = 10
 OPEN_PAGE_WAITE_TIME        = 3
@@ -85,7 +85,7 @@ def connect(url: str, account: str, password: str) -> None:
 
     try:
 
-        # driver.implicitly_wait(OPEN_PAGE_WAITE_TIME)
+        driver.implicitly_wait(OPEN_PAGE_WAITE_TIME)
         driver.get(url)
 
         sys.stdout.write(f"system OK:\t successfully connect target url. {url}\n\n")
@@ -218,22 +218,24 @@ def detect_default_gateway() -> str:
 
     try:
 
-        output = subprocess.check_output(["ipconfig", "/all"], universal_newlines=True)
-        gateway_match = re.search(r"Default Gateway.*: ([\d.]+)", output)
-        
-        if gateway_match:
-    
-            return gateway_match.group(1)
-    
-        else:
-    
-            return None
+        # output = subprocess.check_output(["ipconfig", "/all"], universal_newlines=True)
+        # gateway_match = re.search(r"Default Gateway.*: ([\d.]+)", output)
+
+        ipconfig_result = subprocess.check_output(['ipconfig'], stderr=subprocess.STDOUT, shell=True, universal_newlines=True)
+        ipconfig_lines = ipconfig_result.split('\n')
+
+        for line in ipconfig_lines:
+            if "預設閘道" in line:
+                default_gateway = line.split(':')[-1].strip()
+                return default_gateway
+                
+        return default_gateway
     
     except subprocess.CalledProcessError as e:
 
         frameinfo = getframeinfo(currentframe())
         sys.stdout.write(f"system ERROR:\t error on LINE <{frameinfo.lineno}>\n")
-        sys.stdout.write(f"system DETAIL:\t {e}\n\n")
+        sys.stdout.write(f"system DETAIL:\t {e.output}\n\n")
         
         return None
 
@@ -302,7 +304,7 @@ def copy_driver_and_add_path(file_dir: str) -> bool:
 
 def main() -> None:
 
-    TARGET_TO_CONNECT_WAL_URL = f"http://{detect_default_gateway()}:1000/fgtauth?"
+    TARGET_TO_CONNECT_WAL_URL = f"http://{detect_default_gateway()}:1000/login?"
 
     sys.stdout.write(f"system INFO:\t the Default Gateway is '{TARGET_TO_CONNECT_WAL_URL}'\n\n")
 

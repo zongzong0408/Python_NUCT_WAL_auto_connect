@@ -38,5 +38,5 @@ def main() -> None:
         time.sleep(5)
 
     # return
-  
+
 main()

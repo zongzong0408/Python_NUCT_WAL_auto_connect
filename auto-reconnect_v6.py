@@ -4,6 +4,8 @@ import requests
 import time
 import sys
 
+ip = ""
+
 while (True):
 
     http_code = 404
@@ -22,22 +24,32 @@ while (True):
 
         driver = webdriver.Chrome()
 
-        time.sleep(3)
-        
+        driver.implicitly_wait(5)
+
         ipconfig_result = subprocess.check_output(['ipconfig'], stderr = subprocess.STDOUT, shell = True, universal_newlines = True)
         ipconfig_lines = ipconfig_result.split('\n')
+
         for line in ipconfig_lines:
             if "預設閘道" in line:
                 default_gateway = line.split(':')[-1].strip()
-        
+                ip = default_gateway
+                print(f"dg {ip}\n")
+        print(f"dg {ip}\n")
+
+        driver.implicitly_wait(3)
         driver.get(f"http://{default_gateway}:1000/login?admin")
 
+        driver.implicitly_wait(8)
 
         username_field = driver.find_element("name", "username")
         password_field = driver.find_element("name", "password")
 
+        driver.implicitly_wait(3)
+
         username_field.send_keys("ncutvip@ncut.edu.tw")
         password_field.send_keys("23924505")
+
+        driver.implicitly_wait(3)
 
         username_field = driver.find_element("xpath", '//*[@id="login_form_div"]/form/table/tbody/tr[1]/td[2]/button').click()
 
