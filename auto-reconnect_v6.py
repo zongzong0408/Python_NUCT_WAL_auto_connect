@@ -16,8 +16,6 @@ import requests
 import time
 import sys
 
-ip = ""
-
 while (True):
 
     http_code = 404
@@ -44,9 +42,6 @@ while (True):
         for line in ipconfig_lines:
             if "預設閘道" in line:
                 default_gateway = line.split(':')[-1].strip()
-                ip = default_gateway
-                print(f"dg {ip}\n")
-        print(f"dg {ip}\n")
 
         driver.implicitly_wait(3)
         driver.get(f"http://{default_gateway}:1000/login?admin")
