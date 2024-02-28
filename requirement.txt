@@ -1,7 +1,7 @@
 #selenium==3.0
 selenium==4.5
 urllib3==1.26.6
+beautifulsoup4
 subprocess
-bs4
 requests
 re
