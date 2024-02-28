@@ -17,8 +17,7 @@ import sys
 import os
 
 TEST_URL                    = "https://www.google.com"
-IP                          = "172.16.170.254"
-WAL_URL                     = f"http://{IP}:1000/login?admin"
+WAL_URL                     = "http://172.16.170.254:1000/login?admin"
 
 DETECT_CONNECT_ALIVE_TIME   = 10
 OPEN_PAGE_WAITE_TIME        = 3
