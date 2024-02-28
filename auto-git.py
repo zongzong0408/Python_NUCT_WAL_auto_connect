@@ -33,7 +33,7 @@ def main() -> None:
         current_time = datetime.now()
         commit_message = current_time.strftime("%Y/%m/%d %H:%M")
 
-        git_auto_commit_push(git_repo_path, commit_message)
+        git_commit_push(git_repo_path, commit_message)
 
         time.sleep(5)
 
