@@ -40,6 +40,7 @@ def main() -> None:
         current_time = datetime.now()
         commit_message = current_time.strftime("%Y/%m/%d %H:%M")
 
+        sys.stdout.write("----------------------------------------------\n")
         sys.stdout.write(f"system INFO:\t auto git times is: {times}\n")
         sys.stdout.write(f"system INFO:\t now times is: {commit_message}\n")
 
