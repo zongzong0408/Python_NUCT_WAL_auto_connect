@@ -2,4 +2,6 @@
 selenium==4.5
 urllib3==1.26.6
 subprocess
+bs4
 requests
+re
