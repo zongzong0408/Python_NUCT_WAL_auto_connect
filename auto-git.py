@@ -48,6 +48,8 @@ def main() -> None:
 
         time.sleep(AUTO_GIT_WAIT_TIME)
 
+        times += 1
+
     # return
 
 main()
