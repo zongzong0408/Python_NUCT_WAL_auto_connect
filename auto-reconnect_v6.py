@@ -1,3 +1,15 @@
+"""
+    version C v6.0
+
+    using Python 3.7.0
+    using Windows 11 Home
+    
+    using selenium 4.5.0
+    using urllib 1.2.01
+
+    using Chrome browser driver
+"""
+
 from selenium import webdriver
 import subprocess
 import requests
