@@ -26,8 +26,8 @@
 
 import requests
 import urllib
-import bs4
 import time
+import bs4
 import sys
 
 TEST_URL    = "https://www.google.com"
