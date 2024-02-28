@@ -37,7 +37,7 @@ def reconnect(url: str, account: str, password: str) -> bool:
 
         driver = webdriver.Firefox()
 
-        driver.get("http://172.16.170.254:1000/login?admin")
+        driver.get(url)
 
         sys.stdout.write("提示：開啟連接視窗程序...\n")
 
