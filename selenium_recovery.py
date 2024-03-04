@@ -3,12 +3,13 @@ from selenium import webdriver
 import os
 import time
 
-options = webdriver.FirefoxOptions()
 path = os.getcwd() + r"\driver\firefoxdriver.exe"
-
 print(path)
 
-browser = webdriver.Firefox(executable_path = path, options=options)
+options = webdriver.FirefoxOptions()
+options.binary_location = path
+
+browser = webdriver.Firefox(options=options)
 
 browser.get("www.google.com.tw")
 
