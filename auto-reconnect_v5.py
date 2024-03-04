@@ -348,7 +348,7 @@ def main() -> None:
 
             return
         
-    if (BROWSER == "firefox"):
+    else if (BROWSER == "firefox"):
 
         if (copy_driver_and_add_path("./driver/firefoxdriver.exe") == False):
 
