@@ -9,7 +9,7 @@ print(path)
 options = webdriver.FirefoxOptions()
 options.binary_location = path
 
-browser = webdriver.Firefox(options=options)
+browser = webdriver.Firefox(executable_path=path, options=options)
 
 browser.get("www.google.com.tw")
 
