@@ -352,7 +352,7 @@ def main() -> None:
             # sys.stdout.write(f"system DETAIL:\t {e}\n\n")
 
             return
- 
+
     elif (BROWSER == "firefox"):
 
         if (copy_driver_and_add_path("./driver/firefoxdriver.exe") == False):
@@ -386,6 +386,9 @@ def main() -> None:
     detection_times = 1
 
     while True:
+
+        test()
+        os.system("pause")
 
         if (detect_connection(TEST_IS_CONNECT_WAL_URL) == False):
             
