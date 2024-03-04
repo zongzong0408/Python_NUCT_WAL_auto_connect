@@ -1,6 +1,6 @@
+from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
 from selenium import webdriver
 import os
-from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
 
 path = os.getcwd() + "/driver/firefoxdriver.exe"
 
