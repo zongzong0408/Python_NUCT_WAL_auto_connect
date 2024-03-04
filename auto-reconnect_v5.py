@@ -309,20 +309,21 @@ def main() -> None:
 
     sys.stdout.write(f"system INFO:\t the Default Gateway is '{TARGET_TO_CONNECT_WAL_URL}'\n\n")
 
-    if (BROWSER == "firefox")
-    if (copy_driver_and_add_path("./driver/.exe") == False):
+    if (BROWSER == "firefox"):
 
-        frameinfo = getframeinfo(currentframe())
+        if (copy_driver_and_add_path("./driver/firefoxdriver.exe") == False):
 
-        sys.stdout.write(f"system ERROR:\t error on LINE <{frameinfo.lineno}>\n")
-        sys.stdout.write("system ERROR:\t call function copy_driver_and_add_path() error.\n\n")
-        # sys.stdout.write(f"system DETAIL:\t {e}\n\n")
+            frameinfo = getframeinfo(currentframe())
 
-        return
-    
-    else:
+            sys.stdout.write(f"system ERROR:\t error on LINE <{frameinfo.lineno}>\n")
+            sys.stdout.write("system ERROR:\t call function copy_driver_and_add_path() error.\n\n")
+            # sys.stdout.write(f"system DETAIL:\t {e}\n\n")
 
-        sys.stdout.write(f"system OK:\t successfully copy file and add path to PATH.\n")
+            return
+        
+        else:
+
+            sys.stdout.write(f"system OK:\t successfully copy file and add path to PATH.\n")
 
     if (LOGIN_ACCOUNT["account"] == "..." or LOGIN_ACCOUNT["password"] == "..."):
 
