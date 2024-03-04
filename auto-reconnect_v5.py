@@ -61,7 +61,7 @@ LOGIN_ACCOUNT = {
 
 def connect(url: str, account: str, password: str) -> None:
 
-    if ():
+    if (BROWSER == "chrome"):
 
         try:
 
@@ -86,7 +86,7 @@ def connect(url: str, account: str, password: str) -> None:
             sys.stdout.write("system INFO:\t ...\n\n")
             # sys.stdout.write("system OK:\t now is going to open FireFox.\n")
 
-    else if ():
+    elif (BROWSER == "firefox"):
 
         try:
 
