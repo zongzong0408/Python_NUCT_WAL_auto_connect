@@ -1,3 +1,4 @@
+from webdriver_manager.firefox import GeckoDriverManager
 from selenium import webdriver
 import os
 import time
