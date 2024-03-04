@@ -1,10 +1,10 @@
-from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
 from selenium import webdriver
 import os
 
 path = os.getcwd() + "/driver/firefoxdriver.exe"
 
-binary = FirefoxBinary('path/to/installed firefox binary')
+print(path)
+
 browser = webdriver.Firefox(__path__=f"r/{path}")
 
 browser.get("www.google.com.tw")
