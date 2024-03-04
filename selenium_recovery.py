@@ -1,4 +1,3 @@
-from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
 from selenium import webdriver
 import os
 
@@ -6,7 +5,7 @@ path = os.getcwd() + r"\driver\firefoxdriver.exe"
 
 print(path)
 
-browser = webdriver.Firefox(executable_path = FirefoxBinary(path))
+browser = webdriver.Firefox(executable_path = path)
 
 browser.get("www.google.com.tw")
 
