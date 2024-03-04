@@ -5,7 +5,7 @@ path = os.getcwd() + r"\driver\firefoxdriver.exe"
 
 print(path)
 
-browser = webdriver.Firefox(executable_path = path)
+browser = webdriver.Firefox(executable_path = path, options = )
 
 browser.get("www.google.com.tw")
 
