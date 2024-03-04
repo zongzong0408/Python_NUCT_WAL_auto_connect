@@ -331,7 +331,9 @@ def copy_driver_and_add_path(file_dir: str) -> bool:
 
 def test():
 
-    
+    d = webdriver.Firefox()
+
+    d.get("www.google.com.tw")
 
 def main() -> None:
 
