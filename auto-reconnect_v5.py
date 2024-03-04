@@ -347,8 +347,8 @@ def main() -> None:
             # sys.stdout.write(f"system DETAIL:\t {e}\n\n")
 
             return
-        
-    else if (BROWSER == "firefox"):
+ 
+    elif (BROWSER == "firefox"):
 
         if (copy_driver_and_add_path("./driver/firefoxdriver.exe") == False):
 
