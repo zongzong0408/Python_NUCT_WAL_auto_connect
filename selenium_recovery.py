@@ -1,9 +1,7 @@
 from selenium import webdriver
 import os
 
-path = os.getcwd() + "/driver/firefoxdriver.exe"
-
-driver = webdriver.Firefox(executable_path = path)
+driver = webdriver.Firefox()
 
 driver.get("www.google.com.tw")
 
