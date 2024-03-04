@@ -6,10 +6,10 @@ import time
 path = os.getcwd() + r"\driver\geckodriver.exe"
 print(path)
 
-options = webdriver.FirefoxOptions()
-options.binary_location = path
+options = webdriver.EdgeOptions()
+options.add_argument("--enable-chrome-browser-cloud-management")
 
-browser = webdriver.Chrome()
+browser = webdriver.Edge(options=options)
 
 browser.get("www.google.com.tw")
 
