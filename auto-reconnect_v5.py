@@ -52,7 +52,7 @@ TARGET_TO_CONNECT_WAL_URL   = "http://172.16.170.254:1000/login?"
 DETECT_CONNECT_ALIVE_TIME   = 10
 OPEN_PAGE_WAITE_TIME        = 3
 CLEAR_TERMINAL_SCR_TIMES    = 50
-BROWSER                     = "firefoxdriver"
+BROWSER                     = "chrome"
 
 LOGIN_ACCOUNT = {
     "account"   : "ncutvip@ncut.edu.tw",
@@ -99,17 +99,16 @@ def connect(url: str, account: str, password: str) -> None:
             b = time.time()
             init = round(b - a)
 
-            sys.stdout.write(f"system INFO:\t initialize Chrome drive cost {init} second(s).\n")
-            sys.stdout.write("system OK:\t successfully open Chrome driver.\n\n")
+            sys.stdout.write(f"system INFO:\t initialize Firefox drive cost {init} second(s).\n")
+            sys.stdout.write("system OK:\t successfully open Firefox driver.\n\n")
 
         except Exception as e:
 
             frameinfo = getframeinfo(currentframe())
             sys.stdout.write(f"system ERROR:\t error on LINE <{frameinfo.lineno}>\n")
-            sys.stdout.write("system ERROR:\t cannot open Chrome browser.\n")
+            sys.stdout.write("system ERROR:\t cannot open Firefox browser.\n")
             sys.stdout.write(f"system DETAIL:\t {e}\n\n")
             sys.stdout.write("system INFO:\t ...\n\n")
-            # sys.stdout.write("system OK:\t now is going to open FireFox.\n")
 
     try:
 
