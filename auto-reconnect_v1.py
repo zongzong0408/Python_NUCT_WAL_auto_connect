@@ -4,8 +4,7 @@
     using Python 3.7.0
     using Windows 11 Home
 
-    using selenium 3.0.0
-    using urllib 1.2.01
+    using requests
 
     using Chrome browser driver
 """
