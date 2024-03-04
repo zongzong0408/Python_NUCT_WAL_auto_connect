@@ -61,28 +61,55 @@ LOGIN_ACCOUNT = {
 
 def connect(url: str, account: str, password: str) -> None:
 
-    try:
+    if ():
 
-        a = time.time()
-        
-        option = webdriver.ChromeOptions()
-        option.add_experimental_option("excludeSwitches", ["enable-logging"])
-        driver = webdriver.Chrome(options = option)
-        
-        b = time.time()
-        init = round(b - a)
+        try:
 
-        sys.stdout.write(f"system INFO:\t initialize Chrome drive cost {init} second(s).\n")
-        sys.stdout.write("system OK:\t successfully open Chrome driver.\n\n")
+            a = time.time()
+            
+            option = webdriver.ChromeOptions()
+            option.add_experimental_option("excludeSwitches", ["enable-logging"])
+            driver = webdriver.Chrome(options = option)
+            
+            b = time.time()
+            init = round(b - a)
 
-    except Exception as e:
+            sys.stdout.write(f"system INFO:\t initialize Chrome drive cost {init} second(s).\n")
+            sys.stdout.write("system OK:\t successfully open Chrome driver.\n\n")
 
-        frameinfo = getframeinfo(currentframe())
-        sys.stdout.write(f"system ERROR:\t error on LINE <{frameinfo.lineno}>\n")
-        sys.stdout.write("system ERROR:\t cannot open Chrome browser.\n")
-        sys.stdout.write(f"system DETAIL:\t {e}\n\n")
-        sys.stdout.write("system INFO:\t ...\n\n")
-        # sys.stdout.write("system OK:\t now is going to open FireFox.\n")
+        except Exception as e:
+
+            frameinfo = getframeinfo(currentframe())
+            sys.stdout.write(f"system ERROR:\t error on LINE <{frameinfo.lineno}>\n")
+            sys.stdout.write("system ERROR:\t cannot open Chrome browser.\n")
+            sys.stdout.write(f"system DETAIL:\t {e}\n\n")
+            sys.stdout.write("system INFO:\t ...\n\n")
+            # sys.stdout.write("system OK:\t now is going to open FireFox.\n")
+
+    else if ():
+
+        try:
+
+            a = time.time()
+            
+            option = webdriver.ChromeOptions()
+            option.add_experimental_option("excludeSwitches", ["enable-logging"])
+            driver = webdriver.Chrome(options = option)
+            
+            b = time.time()
+            init = round(b - a)
+
+            sys.stdout.write(f"system INFO:\t initialize Chrome drive cost {init} second(s).\n")
+            sys.stdout.write("system OK:\t successfully open Chrome driver.\n\n")
+
+        except Exception as e:
+
+            frameinfo = getframeinfo(currentframe())
+            sys.stdout.write(f"system ERROR:\t error on LINE <{frameinfo.lineno}>\n")
+            sys.stdout.write("system ERROR:\t cannot open Chrome browser.\n")
+            sys.stdout.write(f"system DETAIL:\t {e}\n\n")
+            sys.stdout.write("system INFO:\t ...\n\n")
+            # sys.stdout.write("system OK:\t now is going to open FireFox.\n")
 
     try:
 
