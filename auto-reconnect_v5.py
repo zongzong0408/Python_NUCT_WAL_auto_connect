@@ -52,6 +52,7 @@ TARGET_TO_CONNECT_WAL_URL   = "http://172.16.170.254:1000/login?"
 DETECT_CONNECT_ALIVE_TIME   = 10
 OPEN_PAGE_WAITE_TIME        = 3
 CLEAR_TERMINAL_SCR_TIMES    = 50
+BROWSER                     = "firefoxdriver"
 
 LOGIN_ACCOUNT = {
     "account"   : "ncutvip@ncut.edu.tw",
@@ -308,7 +309,8 @@ def main() -> None:
 
     sys.stdout.write(f"system INFO:\t the Default Gateway is '{TARGET_TO_CONNECT_WAL_URL}'\n\n")
 
-    if (copy_driver_and_add_path("./driver/chromedriver.exe") == False):
+    if (BROWSER == "firefox")
+    if (copy_driver_and_add_path("./driver/.exe") == False):
 
         frameinfo = getframeinfo(currentframe())
 
