@@ -1,10 +1,14 @@
 from selenium import webdriver
 import os
+from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
 
-driver = webdriver.Firefox()
+path = os.getcwd() + "/driver/firefoxdriver.exe"
 
-driver.get("www.google.com.tw")
+binary = FirefoxBinary('path/to/installed firefox binary')
+browser = webdriver.Firefox(firefox_binary=path)
 
-driver.implicitly_wait(5)
+browser.get("www.google.com.tw")
 
-driver.quit()
+browser.implicitly_wait(5)
+
+browser.quit()
