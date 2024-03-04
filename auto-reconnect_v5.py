@@ -92,9 +92,9 @@ def connect(url: str, account: str, password: str) -> None:
 
             a = time.time()
             
-            option = webdriver.ChromeOptions()
+            option = webdriver.FirefoxOptions()
             option.add_experimental_option("excludeSwitches", ["enable-logging"])
-            driver = webdriver.Chrome(options = option)
+            driver = webdriver.Firefox(options = option)
             
             b = time.time()
             init = round(b - a)
@@ -328,6 +328,10 @@ def copy_driver_and_add_path(file_dir: str) -> bool:
         sys.stdout.write("system INFO:\t script path already exists in PATH variable.\n\n")
 
         return True
+
+def test():
+
+    
 
 def main() -> None:
 
