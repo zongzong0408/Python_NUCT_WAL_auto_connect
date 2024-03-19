@@ -329,12 +329,6 @@ def copy_driver_and_add_path(file_dir: str) -> bool:
 
         return True
 
-def test():
-
-    d = webdriver.Firefox()
-
-    d.get("www.google.com.tw")
-
 def main() -> None:
 
     TARGET_TO_CONNECT_WAL_URL = f"http://{detect_default_gateway()}:1000/login?"
@@ -386,9 +380,6 @@ def main() -> None:
     detection_times = 1
 
     while True:
-
-        test()
-        os.system("pause")
 
         if (detect_connection(TEST_IS_CONNECT_WAL_URL) == False):
             
